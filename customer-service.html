@@ -555,24 +555,21 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
     }
   }
 
-  /* ============ نموذج البحث عن الطلب ============ */
+  /* نموذج البحث عن الطلب */
   $('#supportAccessForm').addEventListener('submit', async event => {
     event.preventDefault();
     const orderNumber = $('#supportOrderNumber').value.trim().toUpperCase();
     const error = $('#supportError');
     const list = $('#supportOrderList');
 
-    // إظهار حالة "جاري البحث"
     error.textContent = lang === 'ar' ? 'جارٍ البحث...' : 'Searching...';
     error.style.color = '#1d4ed8';
     error.style.background = '#e7f0ff';
     error.style.borderColor = '#b6d0ff';
     error.classList.add('show');
 
-    // ⚡ جلب أحدث الطلبات من Supabase
-    if (Cart.fetchOrders) {
-      await Cart.fetchOrders();
-    }
+    if (Cart.fetchOrders) await Cart.fetchOrders();
+    if (Cart.fetchChats) await Cart.fetchChats();
 
     matchedOrders = Cart.getOrders().filter(item => item.orderNumber === orderNumber);
 
@@ -628,19 +625,26 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
     $('#supportOrderList').classList.add('show');
   });
 
-  Cart.onChatChange(orderNumber => {
-    if (orderNumber === activeOrderNumber) renderMessages();
+  /* ⚡ تغيير: نستمع لأي تحديث في الشات */
+  Cart.onChatChange(() => {
+    if (activeOrderNumber) renderMessages();
   });
+
+  /* تحديث حالة الطلب عند وصول أي تغيير */
+  if (Cart.onOrdersChange){
+    Cart.onOrdersChange(() => {
+      if (activeOrderNumber) updateChatStatus();
+    });
+  }
 
   /* تحميل الطلبات أول مرة */
   (async () => {
     if (Cart.fetchOrders) await Cart.fetchOrders();
+    if (Cart.fetchChats) await Cart.fetchChats();
 
     if (savedOrderNumber){
       updateSavedOrderText();
       $('#supportOrderNumber').value = savedOrderNumber;
-
-      // محاولة تلقائية لجلب الطلب المحفوظ
       const found = Cart.getOrders().find(item => item.orderNumber === savedOrderNumber);
       if (found){
         matchedOrders = [found];
@@ -654,6 +658,7 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
   window.addEventListener('storage', event => {
     if (event.key !== 'percent_orders' && event.key !== 'percent_support_order_number') return;
     if (Cart.fetchOrders) Cart.fetchOrders();
+    if (Cart.fetchChats) Cart.fetchChats();
   });
 
   applyLang();
