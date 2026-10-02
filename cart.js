@@ -1,12 +1,11 @@
 /* ============================================================
-   PERCENT PERFUME — Cart Module (Supabase Orders)
+   PERCENT PERFUME — Cart Module (Supabase Orders + Chats)
    ============================================================ */
 (function (global) {
   'use strict';
 
   const CART_KEY    = 'percent_cart';
   const COUPON_KEY  = 'percent_coupon';
-  const CHATS_KEY   = 'percent_order_chats';
 
   const SUPABASE_URL = 'https://iedmrzocqgscnybpvxed.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_Q_vZjEcX-bN6Dkyee3jN5g_TWlovcPQ';
@@ -124,7 +123,7 @@
     persistCoupon(); emit();
   }
 
-  /* ---------- Orders (Supabase) ---------- */
+  /* ============ Orders (Supabase) ============ */
   let cachedOrders = [];
   let orderListeners = new Set();
 
@@ -244,11 +243,42 @@
     return () => orderListeners.delete(fn);
   }
 
-  /* ---------- Order support chats (باقي كما هو) ---------- */
+  /* ============ Order Chats (Supabase) ============ */
+  let cachedChats = {};  // { orderNumber: { messages: [...] } }
+  const chatListeners = new Set();
+
+  async function fetchChats() {
+    try {
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/order_chats?select=*&order=created_at.asc`,
+        { headers }
+      );
+      if (!res.ok) {
+        console.error('Fetch chats error:', res.status);
+        return cachedChats;
+      }
+      const data = await res.json();
+      const newChats = {};
+      (data || []).forEach(row => {
+        const key = String(row.order_number);
+        if (!newChats[key]) newChats[key] = { messages: [] };
+        newChats[key].messages.push({
+          sender: row.sender,
+          text: row.text,
+          createdAt: row.created_at
+        });
+      });
+      cachedChats = newChats;
+      chatListeners.forEach(fn => { try { fn(); } catch(e){} });
+      return cachedChats;
+    } catch (e) {
+      console.error('Fetch chats error:', e);
+      return cachedChats;
+    }
+  }
+
   function getOrderChat(orderNumber) {
-    const chats = readJSON(CHATS_KEY, {});
-    const chat = chats && chats[String(orderNumber || '')];
-    return chat && Array.isArray(chat.messages) ? chat : { messages: [] };
+    return cachedChats[String(orderNumber || '')] || { messages: [] };
   }
 
   function sendOrderMessage(orderNumber, text, sender) {
@@ -256,26 +286,28 @@
     text = String(text || '').trim();
     if (!orderNumber || !text || !['customer', 'admin'].includes(sender)) return false;
 
-    const chats = readJSON(CHATS_KEY, {});
-    if (!chats[orderNumber]) chats[orderNumber] = { messages: [] };
-    if (!Array.isArray(chats[orderNumber].messages)) chats[orderNumber].messages = [];
-    chats[orderNumber].messages.push({
-      sender,
-      text: text.slice(0, 2000),
-      createdAt: new Date().toISOString()
-    });
-    writeJSON(CHATS_KEY, chats);
-    chatListeners.forEach(fn => { try { fn(orderNumber); } catch (e) {} });
+    // 🔥 إرسال إلى Supabase
+    fetch(`${SUPABASE_URL}/rest/v1/order_chats`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        order_number: orderNumber,
+        sender: sender,
+        text: text.slice(0, 2000)
+      })
+    })
+    .then(() => fetchChats())
+    .catch(e => console.error('Send message error:', e));
+
     return true;
   }
 
-  const chatListeners = new Set();
   function onChatChange(fn) {
     chatListeners.add(fn);
     return () => chatListeners.delete(fn);
   }
 
-  /* ---------- Badges ---------- */
+  /* ============ Badges ============ */
   function updateBadges() {
     const qty = getCount();
     document.querySelectorAll('.cart-count').forEach(el => {
@@ -284,7 +316,7 @@
     });
   }
 
-  /* ---------- Pub/Sub ---------- */
+  /* ============ Pub/Sub ============ */
   function emit() {
     updateBadges();
     const state = getState();
@@ -297,7 +329,7 @@
     return () => listeners.delete(fn);
   }
 
-  /* ---------- Cross-tab sync ---------- */
+  /* ============ Cross-tab sync ============ */
   window.addEventListener('storage', (e) => {
     if (e.key === CART_KEY) {
       cart = readJSON(CART_KEY, []);
@@ -308,27 +340,30 @@
       coupon = readJSON(COUPON_KEY, null);
       emit();
     }
-    if (e.key === CHATS_KEY) {
-      chatListeners.forEach(fn => { try { fn(); } catch (err) {} });
-    }
   });
 
-  /* ---------- Realtime ---------- */
+  /* ============ Realtime (orders + chats) ============ */
   function initRealtime() {
     try {
       if (typeof supabase !== 'undefined') {
         const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        client.channel('orders-changes')
+        client.channel('db-changes')
           .on('postgres_changes', { event: '*', schema: 'public', table: 'orders' },
             () => { fetchOrders(); })
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'order_chats' },
+            () => { fetchChats(); })
           .subscribe();
       } else {
         setInterval(fetchOrders, 30000);
+        setInterval(fetchChats, 30000);
       }
-    } catch(e) { setInterval(fetchOrders, 30000); }
+    } catch(e) {
+      setInterval(fetchOrders, 30000);
+      setInterval(fetchChats, 30000);
+    }
   }
 
-  /* ---------- Init ---------- */
+  /* ============ Init ============ */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', updateBadges);
   } else {
@@ -336,8 +371,9 @@
   }
 
   fetchOrders().then(() => initRealtime());
+  fetchChats();
 
-  /* ---------- Public API ---------- */
+  /* ============ Public API ============ */
   global.PercentCart = {
     get: getState,
     getItems: () => cart.slice(),
@@ -347,7 +383,7 @@
     applyCoupon, removeCoupon,
     saveOrder, getOrders, updateOrderStatus, deleteOrder,
     onOrdersChange, fetchOrders,
-    getOrderChat, sendOrderMessage, onChatChange,
+    getOrderChat, sendOrderMessage, onChatChange, fetchChats,
     onChange,
     COUPONS
   };
