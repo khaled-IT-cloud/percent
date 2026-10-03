@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -394,9 +394,6 @@ html[dir="ltr"] .sidebar{border-inline-end:none;border-inline-start:1px solid rg
   .member-hero-points{text-align:center}
 }
 </style>
-
-
-
 </head>
 <body>
 
@@ -502,6 +499,7 @@ html[dir="ltr"] .sidebar{border-inline-end:none;border-inline-start:1px solid rg
               <button class="filter-chip active" data-cat="all"><span>الكل</span><span class="count" id="prodCountAll">0</span></button>
               <button class="filter-chip" data-cat="men"><span>رجالي</span><span class="count" id="prodCountMen">0</span></button>
               <button class="filter-chip" data-cat="women"><span>نسائي</span><span class="count" id="prodCountWomen">0</span></button>
+              <button class="filter-chip" data-cat="best"><span>⭐ الأكثر مبيعاً</span><span class="count" id="prodCountBest">0</span></button>
             </div>
             <button class="btn-sm btn-navy" id="addProductBtn" style="padding:10px 18px;border-radius:10px"><i class="fas fa-plus"></i><span>منتج جديد</span></button>
           </div>
@@ -734,7 +732,7 @@ html[dir="ltr"] .sidebar{border-inline-end:none;border-inline-start:1px solid rg
         <div class="info-field"><small>الوسم</small>
           <select id="pTag" style="width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-weight:700">
             <option value="">بدون</option><option value="new">جديد</option><option value="sale">عرض</option>
-            <option value="best">الأكثر مبيعاً</option><option value="luxe">فاخر</option>
+            <option value="best">⭐ الأكثر مبيعاً</option><option value="luxe">فاخر</option>
           </select>
         </div>
         <div class="info-field"><small>الماركة (Slug) *</small><input type="text" id="pBrand" dir="ltr"></div>
@@ -1309,10 +1307,7 @@ html[dir="ltr"] .sidebar{border-inline-end:none;border-inline-start:1px solid rg
       th{background:#0a1128;color:#d4af37;padding:12px;text-align:right;font-size:12px}td{padding:12px;border-bottom:1px solid #e5e7eb;font-size:13px}
       .totals{background:#fff9ec;border:2px solid #d4af37;border-radius:10px;padding:18px}.totals .row:last-child{border-top:2px solid #d4af37;padding-top:12px;margin-top:8px;font-size:18px}
       .totals .row:last-child strong{color:#b8860b}.footer{margin-top:40px;text-align:center;font-size:11px;color:#999;border-top:1px solid #e5e7eb;padding-top:20px}
-      .status-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:bold;background:#d4af37;color:#0a1128}</style>
-
-<link rel="stylesheet" href="mobile.css">
-</head><body>
+      .status-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:bold;background:#d4af37;color:#0a1128}</style></head><body>
       <div class="head"><div><h1>PERCENT <span>PERFUME</span></h1><small>عطور فاخرة تروي حكايتك</small></div>
       <div class="order-meta"><strong>${o.orderNumber}</strong><small>${formatDate(o.createdAt)}</small></div></div>
       <div style="text-align:center;margin-bottom:24px"><span class="status-badge">${STATUS[o.status || 'pending'].ar}</span></div>
@@ -1362,13 +1357,18 @@ html[dir="ltr"] .sidebar{border-inline-end:none;border-inline-start:1px solid rg
       });
     }
     const all = Products.getProducts();
-    const counts = { all: all.length, men: 0, women: 0 };
-    all.forEach(p => { counts[p.category] = (counts[p.category] || 0) + 1; });
+    const counts = { all: all.length, men: 0, women: 0, best: 0 };
+    all.forEach(p => {
+      counts[p.category] = (counts[p.category] || 0) + 1;
+      if (p.tag === 'best') counts.best++;
+    });
     $('#prodCountAll').textContent = counts.all;
     $('#prodCountMen').textContent = counts.men;
     $('#prodCountWomen').textContent = counts.women;
+    if ($('#prodCountBest')) $('#prodCountBest').textContent = counts.best;
     let list = all.slice();
-    if (productsFilter !== 'all') list = list.filter(p => p.category === productsFilter);
+    if (productsFilter === 'best') list = list.filter(p => p.tag === 'best');
+    else if (productsFilter !== 'all') list = list.filter(p => p.category === productsFilter);
     if (productsSearch){
       list = list.filter(p => {
         const s = [p.nameAr, p.nameEn, p.brand, p.brandLabel].filter(Boolean).join(' ').toLowerCase();
@@ -1403,6 +1403,9 @@ html[dir="ltr"] .sidebar{border-inline-end:none;border-inline-start:1px solid rg
         <td>${tag}</td>
         <td>${p.active !== false ? '<span class="status-badge" data-status="delivered">مفعّل</span>' : '<span class="status-badge" data-status="cancelled">معطّل</span>'}</td>
         <td><div class="actions-cell">
+          <button class="icon-action gold" data-action="toggle-best" data-id="${p.id}" title="${p.tag === 'best' ? 'إزالة من الأكثر مبيعاً' : 'إضافة للأكثر مبيعاً'}">
+            <i class="fas fa-star" style="${p.tag === 'best' ? 'color:#d4af37' : 'color:#c8ccd3'}"></i>
+          </button>
           <button class="icon-action" data-action="edit" data-id="${p.id}" title="تعديل"><i class="fas fa-pen"></i></button>
           <button class="icon-action danger" data-action="delete" data-id="${p.id}" title="حذف"><i class="fas fa-trash-can"></i></button>
         </div></td></tr>`;
@@ -1412,6 +1415,7 @@ html[dir="ltr"] .sidebar{border-inline-end:none;border-inline-start:1px solid rg
         e.stopPropagation();
         if (btn.dataset.action === 'edit') openProductModal(btn.dataset.id);
         else if (btn.dataset.action === 'delete') confirmDeleteProduct(btn.dataset.id);
+        else if (btn.dataset.action === 'toggle-best') toggleBest(btn.dataset.id);
       });
     });
     $$('#productsBody tr[data-id]').forEach(row => {
@@ -1500,6 +1504,19 @@ html[dir="ltr"] .sidebar{border-inline-end:none;border-inline-start:1px solid rg
     const res = await Products.deleteProduct(id);
     if (res.ok){ showToast('تم حذف المنتج', 'fa-trash-can'); renderProducts(); updateNavBadges(); }
     else showToast('فشل الحذف', 'fa-triangle-exclamation', 'error');
+  }
+  async function toggleBest(id){
+    const p = Products.getById(id);
+    if (!p) return;
+    const newTag = p.tag === 'best' ? null : 'best';
+    const res = await Products.updateProduct(id, { tag: newTag });
+    if (res.ok){
+      showToast(newTag === 'best' ? '⭐ تم الإضافة للأكثر مبيعاً' : 'تم الإزالة من الأكثر مبيعاً', 'fa-star');
+      renderProducts();
+      updateNavBadges();
+    } else {
+      showToast('فشل التحديث', 'fa-triangle-exclamation', 'error');
+    }
   }
 
   /* ============ LOYALTY - MEMBERS ============ */
@@ -2140,7 +2157,3 @@ html[dir="ltr"] .sidebar{border-inline-end:none;border-inline-start:1px solid rg
 </script>
 </body>
 </html>
-
-
-
-
