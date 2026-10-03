@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl" data-lang="ar">
 <head>
 <meta charset="UTF-8">
@@ -12,42 +12,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* ============================================================
-   1. Variables & basics
-============================================================ */
 :root{
-  --navy:#0a1128;
-  --navy-2:#0d1730;
-  --navy-deep:#050914;
-  --gold:#d4af37;
-  --gold-light:#f4e4bc;
-  --gold-deep:#b8860b;
-  --bg-light:#fdfbf7;
-  --text-dark:#12172a;
-  --text-muted:#6b7280;
-  --white:#ffffff;
-  --ease:cubic-bezier(.22,1,.36,1);
-  --transition:all .45s var(--ease);
-  --shadow-soft:0 20px 50px rgba(10,17,40,.08);
-  --shadow-hard:0 30px 70px rgba(10,17,40,.18);
+  --navy:#0a1128;--navy-2:#0d1730;--navy-deep:#050914;
+  --gold:#d4af37;--gold-light:#f4e4bc;--gold-deep:#b8860b;
+  --bg-light:#fdfbf7;--text-dark:#12172a;--text-muted:#6b7280;--white:#ffffff;
+  --ease:cubic-bezier(.22,1,.36,1);--transition:all .45s var(--ease);
+  --shadow-soft:0 20px 50px rgba(10,17,40,.08);--shadow-hard:0 30px 70px rgba(10,17,40,.18);
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  font-family:'Almarai',sans-serif;
-  background:var(--bg-light);
-  color:var(--text-dark);
-  overflow-x:hidden;
-  line-height:1.85;
-  position:relative;
-}
-body::before{
-  content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
-  background:
-    radial-gradient(circle at 12% 8%, rgba(212,175,55,.10), transparent 42%),
-    radial-gradient(circle at 88% 78%, rgba(10,17,40,.07), transparent 46%);
-}
+body{font-family:'Almarai',sans-serif;background:var(--bg-light);color:var(--text-dark);overflow-x:hidden;line-height:1.85;position:relative}
+body::before{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(circle at 12% 8%, rgba(212,175,55,.10), transparent 42%),radial-gradient(circle at 88% 78%, rgba(10,17,40,.07), transparent 46%)}
 h1,h2,h3,h4,.english-text{font-family:'Playfair Display',serif}
 a{text-decoration:none;color:inherit}
 ul{list-style:none}
@@ -58,75 +33,26 @@ img{max-width:100%;display:block}
 ::-webkit-scrollbar{width:10px}
 ::-webkit-scrollbar-track{background:#efeae0}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--gold-deep));border-radius:10px}
-
 html[data-lang="ar"] .lang-en{display:none !important}
 html[data-lang="en"] .lang-ar{display:none !important}
-
-.gold-text{
-  background:linear-gradient(100deg,#b8860b 0%,#d4af37 22%,#f9edc4 45%,#d4af37 68%,#b8860b 100%);
-  background-size:220% auto;
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-  animation:shine 6s linear infinite;
-}
+.gold-text{background:linear-gradient(100deg,#b8860b 0%,#d4af37 22%,#f9edc4 45%,#d4af37 68%,#b8860b 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shine 6s linear infinite}
 @keyframes shine{to{background-position:220% center}}
-
-/* ============================================================
-   2. Preloader
-============================================================ */
-#preloader{
-  position:fixed;inset:0;z-index:9999;
-  background:radial-gradient(circle at 50% 45%,#101c3d 0%,var(--navy-deep) 70%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
-  transition:opacity .8s ease,visibility .8s ease;
-}
+#preloader{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at 50% 45%,#101c3d 0%,var(--navy-deep) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .8s ease,visibility .8s ease}
 #preloader.hidden{opacity:0;visibility:hidden}
 .pre-logo{width:120px;height:120px;animation:preFloat 2.6s ease-in-out infinite}
-@keyframes preFloat{
-  0%,100%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 14px rgba(212,175,55,.35))}
-  50%{transform:translateY(-12px) scale(1.04);filter:drop-shadow(0 0 28px rgba(212,175,55,.65))}
-}
+@keyframes preFloat{0%,100%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 14px rgba(212,175,55,.35))}50%{transform:translateY(-12px) scale(1.04);filter:drop-shadow(0 0 28px rgba(212,175,55,.65))}}
 .pre-bar{width:190px;height:2px;background:rgba(212,175,55,.16);overflow:hidden;border-radius:2px}
 .pre-bar span{display:block;height:100%;width:40%;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:preSlide 1.2s ease-in-out infinite}
 @keyframes preSlide{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
 .pre-text{font-family:'Playfair Display',serif;letter-spacing:8px;color:var(--gold);font-size:.8rem;opacity:.8}
-
-/* ============================================================
-   3. Progress + Cursor
-============================================================ */
-.scroll-progress{
-  position:fixed;top:0;inset-inline-start:0;height:3px;width:0;z-index:2500;
-  background:linear-gradient(90deg,var(--gold-deep),var(--gold-light),var(--gold));
-  box-shadow:0 0 14px rgba(212,175,55,.9);
-  transition:width .1s linear;
-}
-.cursor-dot,.cursor-ring{
-  position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;
-  z-index:9998;mix-blend-mode:normal;opacity:0;transition:opacity .3s;
-}
+.scroll-progress{position:fixed;top:0;inset-inline-start:0;height:3px;width:0;z-index:2500;background:linear-gradient(90deg,var(--gold-deep),var(--gold-light),var(--gold));box-shadow:0 0 14px rgba(212,175,55,.9);transition:width .1s linear}
+.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:9998;mix-blend-mode:normal;opacity:0;transition:opacity .3s}
 .cursor-dot{width:6px;height:6px;background:var(--gold);transform:translate(-50%,-50%)}
-.cursor-ring{
-  width:38px;height:38px;border:1px solid rgba(212,175,55,.7);
-  transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s,opacity .3s;
-}
+.cursor-ring{width:38px;height:38px;border:1px solid rgba(212,175,55,.7);transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s,opacity .3s}
 .cursor-ring.grow{width:62px;height:62px;background:rgba(212,175,55,.12)}
 @media (hover:hover) and (pointer:fine){ .cursor-dot,.cursor-ring{opacity:1} }
-
-/* ============================================================
-   4. Header
-============================================================ */
-header{
-  position:fixed;top:0;inset-inline-start:0;width:100%;
-  padding:22px 0;z-index:1200;transition:var(--transition);
-  background:transparent;
-}
-header.scrolled{
-  padding:12px 0;
-  background:rgba(253,251,247,.86);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  box-shadow:0 8px 32px rgba(10,17,40,.07);
-  border-bottom:1px solid rgba(212,175,55,.18);
-}
+header{position:fixed;top:0;inset-inline-start:0;width:100%;padding:22px 0;z-index:1200;transition:var(--transition);background:transparent}
+header.scrolled{padding:12px 0;background:rgba(253,251,247,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 8px 32px rgba(10,17,40,.07);border-bottom:1px solid rgba(212,175,55,.18)}
 .nav-container{display:flex;justify-content:space-between;align-items:center;gap:20px}
 .brand{display:flex;align-items:center;gap:12px;transition:var(--transition);user-select:none;-webkit-tap-highlight-color:transparent}
 .brand:hover{transform:translateY(-2px)}
@@ -136,368 +62,132 @@ header.scrolled{
 .brand-name{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;letter-spacing:4px;color:var(--navy)}
 .brand-sub{font-family:'Playfair Display',serif;font-size:.52rem;letter-spacing:5px;color:var(--gold);margin-top:3px}
 .nav-links{display:flex;gap:34px;align-items:center}
-.nav-links a{
-  font-weight:700;color:var(--navy);font-size:.93rem;position:relative;
-  transition:var(--transition);padding:4px 0;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:0;inset-inline-start:0;width:0;height:2px;
-  background:linear-gradient(90deg,var(--gold),var(--gold-light));
-  transition:width .45s var(--ease);
-}
+.nav-links a{font-weight:700;color:var(--navy);font-size:.93rem;position:relative;transition:var(--transition);padding:4px 0}
+.nav-links a::after{content:'';position:absolute;bottom:0;inset-inline-start:0;width:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:width .45s var(--ease)}
 .nav-links a:hover{color:var(--gold)}
 .nav-links a:hover::after{width:100%}
 .nav-icons{display:flex;gap:14px;align-items:center}
-.icon-btn{
-  width:42px;height:42px;border-radius:50%;border:1px solid rgba(10,17,40,.12);
-  background:transparent;color:var(--navy);cursor:pointer;font-size:1rem;
-  display:flex;align-items:center;justify-content:center;position:relative;
-  transition:var(--transition);
-}
+.icon-btn{width:42px;height:42px;border-radius:50%;border:1px solid rgba(10,17,40,.12);background:transparent;color:var(--navy);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;position:relative;transition:var(--transition)}
 .icon-btn:hover{background:var(--navy);color:var(--gold);border-color:var(--navy);transform:translateY(-3px)}
-.cart-count{
-  position:absolute;top:-5px;inset-inline-end:-5px;min-width:20px;height:20px;
-  background:var(--gold);color:var(--navy);font-size:.7rem;font-weight:800;
-  border-radius:20px;display:flex;align-items:center;justify-content:center;padding:0 5px;
-  transform:scale(0);transition:transform .35s var(--ease);
-}
+.cart-count{position:absolute;top:-5px;inset-inline-end:-5px;min-width:20px;height:20px;background:var(--gold);color:var(--navy);font-size:.7rem;font-weight:800;border-radius:20px;display:flex;align-items:center;justify-content:center;padding:0 5px;transform:scale(0);transition:transform .35s var(--ease)}
 .cart-count.show{transform:scale(1)}
 .cart-count.pop{animation:pop .45s var(--ease)}
 @keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.5)}100%{transform:scale(1)}}
-.lang-switch{
-  background:transparent;border:1px solid var(--navy);color:var(--navy);
-  padding:8px 16px;cursor:pointer;font-weight:800;font-size:.78rem;
-  letter-spacing:1px;border-radius:30px;transition:var(--transition);
-}
+.lang-switch{background:transparent;border:1px solid var(--navy);color:var(--navy);padding:8px 16px;cursor:pointer;font-weight:800;font-size:.78rem;letter-spacing:1px;border-radius:30px;transition:var(--transition)}
 .lang-switch:hover{background:var(--navy);color:var(--gold);transform:translateY(-2px)}
 .menu-toggle{display:none;font-size:1.4rem;cursor:pointer;color:var(--navy);width:42px;height:42px;align-items:center;justify-content:center}
-
-/* ============================================================
-   5. Hero
-============================================================ */
-.hero{
-  min-height:100vh;display:flex;align-items:center;
-  padding:150px 0 90px;position:relative;overflow:hidden;
-}
+.hero{min-height:100vh;display:flex;align-items:center;padding:150px 0 90px;position:relative;overflow:hidden}
 .hero-orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
 .hero-orb.o1{width:520px;height:520px;background:rgba(212,175,55,.20);top:-140px;inset-inline-end:-140px;animation:drift 14s ease-in-out infinite}
 .hero-orb.o2{width:420px;height:420px;background:rgba(10,17,40,.10);bottom:-160px;inset-inline-start:-120px;animation:drift 18s ease-in-out infinite reverse}
 @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-40px)}}
 .particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
-.particle{
-  position:absolute;bottom:-20px;border-radius:50%;
-  background:radial-gradient(circle,var(--gold-light),var(--gold));
-  opacity:0;animation:rise linear infinite;
-}
-@keyframes rise{
-  0%{transform:translateY(0) scale(.5);opacity:0}
-  12%{opacity:.85}
-  85%{opacity:.4}
-  100%{transform:translateY(-92vh) scale(1.3);opacity:0}
-}
+.particle{position:absolute;bottom:-20px;border-radius:50%;background:radial-gradient(circle,var(--gold-light),var(--gold));opacity:0;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0) scale(.5);opacity:0}12%{opacity:.85}85%{opacity:.4}100%{transform:translateY(-92vh) scale(1.3);opacity:0}}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center;position:relative;z-index:3}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:9px 22px;border-radius:40px;
-  background:rgba(212,175,55,.10);
-  border:1px solid rgba(212,175,55,.35);
-  color:var(--gold-deep);font-weight:800;font-size:.8rem;letter-spacing:2px;
-  margin-bottom:26px;
-}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;padding:9px 22px;border-radius:40px;background:rgba(212,175,55,.10);border:1px solid rgba(212,175,55,.35);color:var(--gold-deep);font-weight:800;font-size:.8rem;letter-spacing:2px;margin-bottom:26px}
 .hero-badge i{color:var(--gold);font-size:.7rem}
-.hero-title{
-  font-size:clamp(2.9rem,6.4vw,5.4rem);
-  line-height:1.02;color:var(--navy);margin-bottom:22px;font-weight:700;
-  letter-spacing:2px;
-}
+.hero-title{font-size:clamp(2.9rem,6.4vw,5.4rem);line-height:1.02;color:var(--navy);margin-bottom:22px;font-weight:700;letter-spacing:2px}
 .hero-title .line{display:block;overflow:hidden}
-.hero-title .line > span{
-  display:block;transform:translateY(110%);
-  animation:lineUp 1.1s var(--ease) forwards;
-}
+.hero-title .line > span{display:block;transform:translateY(110%);animation:lineUp 1.1s var(--ease) forwards}
 .hero-title .line:nth-child(2) > span{animation-delay:.18s}
 @keyframes lineUp{to{transform:translateY(0)}}
-.hero-tagline{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:clamp(1.05rem,2vw,1.35rem);
-  color:var(--gold);margin-bottom:20px;letter-spacing:1px;
-}
+.hero-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.05rem,2vw,1.35rem);color:var(--gold);margin-bottom:20px;letter-spacing:1px}
 .hero p.hero-desc{font-size:1.05rem;color:var(--text-muted);max-width:540px;margin-bottom:38px}
 .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
-
-.btn{
-  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  padding:16px 38px;background:var(--navy);color:var(--white);
-  font-weight:800;font-size:.95rem;cursor:pointer;border:1px solid var(--navy);
-  border-radius:6px;overflow:hidden;
-  box-shadow:0 6px 0 #050914;
-  transition:transform .22s var(--ease),box-shadow .22s var(--ease),background .3s,color .3s;
-}
-.btn::after{
-  content:'';position:absolute;top:0;inset-inline-start:-120%;
-  width:60%;height:100%;transform:skewX(-22deg);
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
-  transition:inset-inline-start .7s var(--ease);
-}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 38px;background:var(--navy);color:var(--white);font-weight:800;font-size:.95rem;cursor:pointer;border:1px solid var(--navy);border-radius:6px;overflow:hidden;box-shadow:0 6px 0 #050914;transition:transform .22s var(--ease),box-shadow .22s var(--ease),background .3s,color .3s}
+.btn::after{content:'';position:absolute;top:0;inset-inline-start:-120%;width:60%;height:100%;transform:skewX(-22deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);transition:inset-inline-start .7s var(--ease)}
 .btn:hover::after{inset-inline-start:150%}
 .btn:hover{transform:translateY(-3px);box-shadow:0 9px 0 #050914}
 .btn:active{transform:translateY(4px);box-shadow:0 2px 0 #050914}
 .btn-outline{background:transparent;color:var(--navy);box-shadow:0 6px 0 var(--gold)}
 .btn-outline:hover{background:var(--navy);color:var(--gold);box-shadow:0 9px 0 var(--gold)}
 .btn-outline:active{box-shadow:0 2px 0 var(--gold)}
-.btn-gold{
-  background:linear-gradient(120deg,var(--gold),var(--gold-light),var(--gold));
-  background-size:200% auto;color:var(--navy);border-color:var(--gold);
-  box-shadow:0 6px 0 #8f6b12;animation:shine 4s linear infinite;
-}
+.btn-gold{background:linear-gradient(120deg,var(--gold),var(--gold-light),var(--gold));background-size:200% auto;color:var(--navy);border-color:var(--gold);box-shadow:0 6px 0 #8f6b12;animation:shine 4s linear infinite}
 .btn-gold:hover{box-shadow:0 9px 0 #8f6b12}
-
 .hero-visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:520px}
-.halo{
-  position:absolute;width:420px;height:420px;border-radius:50%;
-  background:conic-gradient(from 0deg,transparent,rgba(212,175,55,.55),transparent 45%,rgba(212,175,55,.35),transparent 80%);
-  animation:spin 12s linear infinite;filter:blur(2px);opacity:.85;
-}
+.halo{position:absolute;width:420px;height:420px;border-radius:50%;background:conic-gradient(from 0deg,transparent,rgba(212,175,55,.55),transparent 45%,rgba(212,175,55,.35),transparent 80%);animation:spin 12s linear infinite;filter:blur(2px);opacity:.85}
 @keyframes spin{to{transform:rotate(360deg)}}
-.halo-ring{
-  position:absolute;width:470px;height:470px;border-radius:50%;
-  border:1px dashed rgba(212,175,55,.35);
-  animation:spin 26s linear infinite reverse;
-}
-.halo-ring::before{
-  content:'';position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;
-  background:var(--gold);box-shadow:0 0 18px var(--gold);transform:translateX(-50%);
-}
-.hero-card{
-  position:relative;width:340px;height:400px;border-radius:28px;
-  background:linear-gradient(155deg,rgba(255,255,255,.94),rgba(255,255,255,.62));
-  border:1px solid rgba(212,175,55,.35);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 40px 80px rgba(10,17,40,.18),0 0 60px rgba(212,175,55,.18);
-  transform-style:preserve-3d;
-  animation:float3D 7s ease-in-out infinite;
-  transition:transform .2s ease-out;
-  z-index:4;
-}
-@keyframes float3D{
-  0%,100%{transform:translateY(0) rotateX(0) rotateY(0)}
-  50%{transform:translateY(-22px) rotateX(5deg) rotateY(-6deg)}
-}
+.halo-ring{position:absolute;width:470px;height:470px;border-radius:50%;border:1px dashed rgba(212,175,55,.35);animation:spin 26s linear infinite reverse}
+.halo-ring::before{content:'';position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold);transform:translateX(-50%)}
+.hero-card{position:relative;width:340px;height:400px;border-radius:28px;background:linear-gradient(155deg,rgba(255,255,255,.94),rgba(255,255,255,.62));border:1px solid rgba(212,175,55,.35);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;box-shadow:0 40px 80px rgba(10,17,40,.18),0 0 60px rgba(212,175,55,.18);transform-style:preserve-3d;animation:float3D 7s ease-in-out infinite;transition:transform .2s ease-out;z-index:4}
+@keyframes float3D{0%,100%{transform:translateY(0) rotateX(0) rotateY(0)}50%{transform:translateY(-22px) rotateX(5deg) rotateY(-6deg)}}
 .hero-card svg{width:200px;height:200px;filter:drop-shadow(0 14px 30px rgba(212,175,55,.45));transform:translateZ(60px)}
-.hero-card::after{
-  content:'';position:absolute;inset:0;border-radius:28px;pointer-events:none;
-  background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);
-  background-size:250% 100%;animation:sweep 5s linear infinite;
-}
+.hero-card::after{content:'';position:absolute;inset:0;border-radius:28px;pointer-events:none;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);background-size:250% 100%;animation:sweep 5s linear infinite}
 @keyframes sweep{0%{background-position:180% 0}100%{background-position:-80% 0}}
-.float-chip{
-  position:absolute;z-index:6;
-  display:inline-flex;align-items:center;gap:8px;
-  padding:10px 18px;border-radius:40px;font-size:.78rem;font-weight:800;
-  background:rgba(255,255,255,.92);color:var(--navy);
-  border:1px solid rgba(212,175,55,.4);
-  box-shadow:0 14px 34px rgba(10,17,40,.14);
-  backdrop-filter:blur(10px);white-space:nowrap;
-}
+.float-chip{position:absolute;z-index:6;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:40px;font-size:.78rem;font-weight:800;background:rgba(255,255,255,.92);color:var(--navy);border:1px solid rgba(212,175,55,.4);box-shadow:0 14px 34px rgba(10,17,40,.14);backdrop-filter:blur(10px);white-space:nowrap}
 .float-chip i{color:var(--gold)}
 .chip-1{top:36px;inset-inline-start:-24px;animation:floatChip 5s ease-in-out infinite}
 .chip-2{bottom:58px;inset-inline-end:-30px;animation:floatChip 6.5s ease-in-out infinite reverse}
 .chip-3{bottom:-6px;inset-inline-start:34px;animation:floatChip 7.5s ease-in-out infinite}
 @keyframes floatChip{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-
-.marquee{
-  background:var(--navy);padding:20px 0;overflow:hidden;
-  border-block:1px solid rgba(212,175,55,.28);
-  position:relative;z-index:5;
-}
+.marquee{background:var(--navy);padding:20px 0;overflow:hidden;border-block:1px solid rgba(212,175,55,.28);position:relative;z-index:5}
 .marquee-track{display:flex;width:max-content;animation:marquee 32s linear infinite}
 .marquee:hover .marquee-track{animation-play-state:paused}
 @keyframes marquee{to{transform:translateX(-50%)}}
-.marquee-item{
-  display:inline-flex;align-items:center;gap:26px;padding-inline:26px;
-  color:var(--gold-light);font-family:'Playfair Display',serif;
-  font-size:1.05rem;letter-spacing:4px;white-space:nowrap;
-}
+.marquee-item{display:inline-flex;align-items:center;gap:26px;padding-inline:26px;color:var(--gold-light);font-family:'Playfair Display',serif;font-size:1.05rem;letter-spacing:4px;white-space:nowrap}
 .marquee-item i{color:var(--gold);font-size:.6rem}
-
 section{padding:120px 0;position:relative}
 .section-header{margin-bottom:64px;max-width:660px}
 .section-header.center{margin-inline:auto;text-align:center}
-.section-eyebrow{
-  display:inline-flex;align-items:center;gap:12px;
-  color:var(--gold);font-size:.78rem;font-weight:800;letter-spacing:4px;
-  margin-bottom:16px;text-transform:uppercase;
-}
-.section-eyebrow::before,.section-eyebrow::after{
-  content:'';width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));
-}
+.section-eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--gold);font-size:.78rem;font-weight:800;letter-spacing:4px;margin-bottom:16px;text-transform:uppercase}
+.section-eyebrow::before,.section-eyebrow::after{content:'';width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
 .section-eyebrow::after{background:linear-gradient(90deg,var(--gold),transparent)}
 .section-header h2{font-size:clamp(2.1rem,4.4vw,3.3rem);color:var(--navy);line-height:1.18;margin-bottom:14px}
 .section-header p{color:var(--text-muted);font-size:1.05rem}
-
-[data-reveal]{
-  opacity:0;transform:translateY(58px);
-  transition:opacity 1s var(--ease),transform 1s var(--ease);
-  transition-delay:var(--d,0s);
-}
+[data-reveal]{opacity:0;transform:translateY(58px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
 [data-reveal].active{opacity:1;transform:translateY(0)}
 [data-reveal="left"]{transform:translateX(-70px)}
 [data-reveal="right"]{transform:translateX(70px)}
 [data-reveal="zoom"]{transform:scale(.9)}
 [data-reveal="left"].active,[data-reveal="right"].active,[data-reveal="zoom"].active{transform:none}
-
 .collections{background:var(--white)}
 .collections-grid{display:grid;grid-template-columns:1fr 1fr;gap:38px}
-.collection-card{
-  position:relative;height:520px;border-radius:26px;overflow:hidden;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;cursor:pointer;
-  background:linear-gradient(160deg,#faf7f0,#f1ece0);
-  border:1px solid rgba(212,175,55,.35);
-  box-shadow:var(--shadow-soft);
-  transform-style:preserve-3d;
-  transition:transform .18s ease-out,box-shadow .5s var(--ease),background .6s var(--ease);
-}
-.collection-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(150deg,var(--navy),#16224a 60%,var(--navy-deep));
-  opacity:0;transition:opacity .6s var(--ease);
-}
-.collection-card::after{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(212,175,55,.30),transparent 55%);
-  opacity:0;transition:opacity .4s;
-}
+.collection-card{position:relative;height:520px;border-radius:26px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;background:linear-gradient(160deg,#faf7f0,#f1ece0);border:1px solid rgba(212,175,55,.35);box-shadow:var(--shadow-soft);transform-style:preserve-3d;transition:transform .18s ease-out,box-shadow .5s var(--ease),background .6s var(--ease)}
+.collection-card::before{content:'';position:absolute;inset:0;background:linear-gradient(150deg,var(--navy),#16224a 60%,var(--navy-deep));opacity:0;transition:opacity .6s var(--ease)}
+.collection-card::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(212,175,55,.30),transparent 55%);opacity:0;transition:opacity .4s}
 .collection-card:hover::before{opacity:1}
 .collection-card:hover::after{opacity:1}
 .collection-card:hover{box-shadow:var(--shadow-hard)}
-.collection-icon{
-  font-size:2.6rem;color:var(--gold);margin-bottom:22px;
-  transform:translateZ(55px);transition:var(--transition);
-}
+.collection-icon{font-size:2.6rem;color:var(--gold);margin-bottom:22px;transform:translateZ(55px);transition:var(--transition)}
 .collection-card:hover .collection-icon{transform:translateZ(80px) scale(1.15) rotate(6deg)}
-.collection-title{
-  font-size:2.4rem;color:var(--navy);margin-bottom:12px;position:relative;z-index:2;
-  transform:translateZ(45px);transition:var(--transition);
-}
-.collection-desc{
-  color:var(--text-muted);margin-bottom:30px;position:relative;z-index:2;
-  transform:translateZ(35px);transition:var(--transition);font-size:.98rem;
-}
+.collection-title{font-size:2.4rem;color:var(--navy);margin-bottom:12px;position:relative;z-index:2;transform:translateZ(45px);transition:var(--transition)}
+.collection-desc{color:var(--text-muted);margin-bottom:30px;position:relative;z-index:2;transform:translateZ(35px);transition:var(--transition);font-size:.98rem}
 .collection-card:hover .collection-title{color:var(--gold-light)}
 .collection-card:hover .collection-desc{color:rgba(255,255,255,.68)}
-.collection-btn{
-  position:relative;z-index:2;
-  padding:14px 38px;border-radius:40px;
-  border:1px solid var(--navy);background:transparent;color:var(--navy);
-  font-weight:800;font-size:.9rem;cursor:pointer;
-  transform:translateZ(60px);transition:var(--transition);
-  display:inline-flex;align-items:center;gap:10px;
-}
-.collection-card:hover .collection-btn{
-  background:var(--gold);color:var(--navy);border-color:var(--gold);
-  box-shadow:0 10px 30px rgba(212,175,55,.4);
-}
+.collection-btn{position:relative;z-index:2;padding:14px 38px;border-radius:40px;border:1px solid var(--navy);background:transparent;color:var(--navy);font-weight:800;font-size:.9rem;cursor:pointer;transform:translateZ(60px);transition:var(--transition);display:inline-flex;align-items:center;gap:10px}
+.collection-card:hover .collection-btn{background:var(--gold);color:var(--navy);border-color:var(--gold);box-shadow:0 10px 30px rgba(212,175,55,.4)}
 .collection-btn i{transition:transform .4s var(--ease)}
 .collection-card:hover .collection-btn i{transform:translateX(-6px)}
 html[dir="ltr"] .collection-card:hover .collection-btn i{transform:translateX(6px)}
-
 .story{background:var(--bg-light);overflow:hidden}
 .story-wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
 .story-visual{position:relative;height:480px;display:flex;align-items:center;justify-content:center}
-.story-frame{
-  position:relative;width:100%;height:100%;border-radius:26px;
-  background:linear-gradient(155deg,var(--navy),#131f42);
-  border:1px solid rgba(212,175,55,.35);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 40px 80px rgba(10,17,40,.28);
-  overflow:hidden;
-}
-.story-frame::before{
-  content:'';position:absolute;inset:-40%;
-  background:conic-gradient(from 0deg,transparent,rgba(212,175,55,.35),transparent 40%);
-  animation:spin 9s linear infinite;
-}
+.story-frame{position:relative;width:100%;height:100%;border-radius:26px;background:linear-gradient(155deg,var(--navy),#131f42);border:1px solid rgba(212,175,55,.35);display:flex;align-items:center;justify-content:center;box-shadow:0 40px 80px rgba(10,17,40,.28);overflow:hidden}
+.story-frame::before{content:'';position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,rgba(212,175,55,.35),transparent 40%);animation:spin 9s linear infinite}
 .story-frame svg{width:190px;height:190px;position:relative;z-index:2;filter:drop-shadow(0 0 30px rgba(212,175,55,.55))}
-.story-frame .frame-line{
-  position:absolute;inset:22px;border:1px solid rgba(212,175,55,.28);border-radius:16px;z-index:3;pointer-events:none;
-}
+.story-frame .frame-line{position:absolute;inset:22px;border:1px solid rgba(212,175,55,.28);border-radius:16px;z-index:3;pointer-events:none}
 .story-content h2{font-size:clamp(2rem,4vw,3rem);color:var(--navy);margin-bottom:22px}
 .story-content p{color:var(--text-muted);font-size:1.05rem;margin-bottom:18px}
-.story-quote{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:1.35rem;color:var(--gold);font-weight:600;
-  padding-inline-start:22px;border-inline-start:3px solid var(--gold);
-  margin:30px 0;
-}
+.story-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.35rem;color:var(--gold);font-weight:600;padding-inline-start:22px;border-inline-start:3px solid var(--gold);margin:30px 0}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
-.stat{
-  text-align:center;padding:24px 12px;border-radius:16px;
-  background:rgba(255,255,255,.7);border:1px solid rgba(212,175,55,.28);
-  transition:var(--transition);
-}
+.stat{text-align:center;padding:24px 12px;border-radius:16px;background:rgba(255,255,255,.7);border:1px solid rgba(212,175,55,.28);transition:var(--transition)}
 .stat:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(10,17,40,.10);border-color:var(--gold)}
 .stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--navy);line-height:1}
 .stat-num span{color:var(--gold)}
 .stat-label{font-size:.82rem;color:var(--text-muted);margin-top:8px;font-weight:700}
-
 .bestsellers{background:var(--white)}
 .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:34px}
-
-.product-card{
-  position:relative;background:var(--bg-light);border-radius:20px;padding:22px;
-  border:1px solid rgba(10,17,40,.06);
-  transform-style:preserve-3d;
-  transition:transform .18s ease-out,box-shadow .5s var(--ease),border-color .4s;
-  text-align:center;
-  display:flex;flex-direction:column;
-}
-.product-card:hover{
-  border-color:rgba(212,175,55,.6);
-  box-shadow:0 34px 60px rgba(10,17,40,.14);
-}
-.product-media{
-  position:relative;height:250px;border-radius:14px;overflow:hidden;
-  background:linear-gradient(160deg,#f3efe6,#e9e3d5);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:20px;transform:translateZ(30px);
-  transition:var(--transition);
-}
-.product-media .media-placeholder{
-  position:absolute;top:50%;left:50%;
-  width:96px;height:96px;
-  transform:translate(-50%,-50%);
-  z-index:1;opacity:.5;
-  transition:all .55s var(--ease);
-  filter:drop-shadow(0 8px 18px rgba(212,175,55,.35));
-  pointer-events:none;
-}
-.product-media .media-img{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  z-index:2;
-  transition:transform .8s var(--ease);
-  background:linear-gradient(160deg,#f3efe6,#e9e3d5);
-}
+.product-card{position:relative;background:var(--bg-light);border-radius:20px;padding:22px;border:1px solid rgba(10,17,40,.06);transform-style:preserve-3d;transition:transform .18s ease-out,box-shadow .5s var(--ease),border-color .4s;text-align:center;display:flex;flex-direction:column}
+.product-card:hover{border-color:rgba(212,175,55,.6);box-shadow:0 34px 60px rgba(10,17,40,.14)}
+.product-media{position:relative;height:250px;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#f3efe6,#e9e3d5);display:flex;align-items:center;justify-content:center;margin-bottom:20px;transform:translateZ(30px);transition:var(--transition)}
+.product-media .media-placeholder{position:absolute;top:50%;left:50%;width:96px;height:96px;transform:translate(-50%,-50%);z-index:1;opacity:.5;transition:all .55s var(--ease);filter:drop-shadow(0 8px 18px rgba(212,175,55,.35));pointer-events:none}
+.product-media .media-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:transform .8s var(--ease);background:linear-gradient(160deg,#f3efe6,#e9e3d5)}
 .product-card:hover .product-media .media-img{transform:scale(1.07)}
-.product-card:hover .product-media .media-placeholder{
-  opacity:.95;
-  transform:translate(-50%,-50%) scale(1.12) rotate(-5deg);
-}
-.product-media::after{
-  content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
-  background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);
-  background-size:250% 100%;background-position:180% 0;
-  transition:background-position .9s var(--ease);
-}
+.product-card:hover .product-media .media-placeholder{opacity:.95;transform:translate(-50%,-50%) scale(1.12) rotate(-5deg)}
+.product-media::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);background-size:250% 100%;background-position:180% 0;transition:background-position .9s var(--ease)}
 .product-card:hover .product-media::after{background-position:-80% 0}
-.product-tag{
-  position:absolute;top:12px;inset-inline-start:12px;z-index:5;
-  padding:5px 14px;border-radius:30px;font-size:.68rem;font-weight:800;
-  background:var(--navy);color:var(--gold);letter-spacing:1px;
-}
+.product-tag{position:absolute;top:12px;inset-inline-start:12px;z-index:5;padding:5px 14px;border-radius:30px;font-size:.68rem;font-weight:800;background:var(--navy);color:var(--gold);letter-spacing:1px}
 .product-tag.sale{background:var(--gold);color:var(--navy)}
 .product-title{font-size:1.08rem;color:var(--navy);font-weight:700;margin-bottom:4px;transform:translateZ(20px)}
 .product-sub{font-size:.78rem;color:var(--text-muted);letter-spacing:2px;margin-bottom:10px;font-family:'Playfair Display',serif}
@@ -505,57 +195,23 @@ html[dir="ltr"] .collection-card:hover .collection-btn i{transform:translateX(6p
 .price-now{color:var(--gold-deep);font-size:1.3rem;font-weight:800}
 .price-old{color:#b9b9b9;text-decoration:line-through;font-size:.88rem}
 .stars{color:var(--gold);font-size:.72rem;margin-bottom:14px;letter-spacing:2px}
-.add-to-cart{
-  width:100%;padding:13px;border-radius:10px;
-  background:transparent;border:1px solid var(--navy);color:var(--navy);
-  font-weight:800;font-size:.88rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:9px;
-  transition:var(--transition);transform:translateZ(25px);position:relative;overflow:hidden;
-}
+.add-to-cart{width:100%;padding:13px;border-radius:10px;background:transparent;border:1px solid var(--navy);color:var(--navy);font-weight:800;font-size:.88rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:var(--transition);transform:translateZ(25px);position:relative;overflow:hidden}
 .add-to-cart:hover{background:var(--navy);color:var(--gold);letter-spacing:1px}
-
-.loyalty{
-  background:radial-gradient(circle at 20% 20%,#131f42,var(--navy) 45%,var(--navy-deep));
-  color:var(--white);overflow:hidden;position:relative;
-}
-.loyalty::before{
-  content:'';position:absolute;inset:0;opacity:.4;
-  background:
-    radial-gradient(circle at 85% 15%,rgba(212,175,55,.22),transparent 45%),
-    radial-gradient(circle at 10% 85%,rgba(212,175,55,.14),transparent 40%);
-}
+.loyalty{background:radial-gradient(circle at 20% 20%,#131f42,var(--navy) 45%,var(--navy-deep));color:var(--white);overflow:hidden;position:relative}
+.loyalty::before{content:'';position:absolute;inset:0;opacity:.4;background:radial-gradient(circle at 85% 15%,rgba(212,175,55,.22),transparent 45%),radial-gradient(circle at 10% 85%,rgba(212,175,55,.14),transparent 40%)}
 .loyalty .container{position:relative;z-index:2}
 .loyalty-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
 .loyalty h2{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:18px;letter-spacing:2px}
 .loyalty p{color:#a9b3d0;font-size:1.05rem;max-width:560px;margin-bottom:26px}
 .loyalty-perks{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:36px}
-.perk{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:9px 20px;border-radius:40px;font-size:.82rem;font-weight:700;
-  background:rgba(212,175,55,.10);border:1px solid rgba(212,175,55,.35);color:var(--gold-light);
-  transition:var(--transition);
-}
+.perk{display:inline-flex;align-items:center;gap:9px;padding:9px 20px;border-radius:40px;font-size:.82rem;font-weight:700;background:rgba(212,175,55,.10);border:1px solid rgba(212,175,55,.35);color:var(--gold-light);transition:var(--transition)}
 .perk:hover{background:rgba(212,175,55,.22);transform:translateY(-4px)}
 .perk i{color:var(--gold)}
 .cube-stage{width:230px;height:230px;margin:0 auto;perspective:1100px;position:relative}
-.cube{
-  position:relative;width:230px;height:230px;
-  transform-style:preserve-3d;
-  animation:cubeSpin 18s linear infinite;
-}
+.cube{position:relative;width:230px;height:230px;transform-style:preserve-3d;animation:cubeSpin 18s linear infinite}
 .cube-stage:hover .cube{animation-play-state:paused}
-@keyframes cubeSpin{
-  from{transform:rotateX(-14deg) rotateY(0deg)}
-  to{transform:rotateX(-14deg) rotateY(360deg)}
-}
-.cube-face{
-  position:absolute;inset:0;border-radius:18px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
-  background:linear-gradient(155deg,rgba(212,175,55,.16),rgba(212,175,55,.03));
-  border:1px solid rgba(212,175,55,.45);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  box-shadow:inset 0 0 40px rgba(212,175,55,.12);
-}
+@keyframes cubeSpin{from{transform:rotateX(-14deg) rotateY(0deg)}to{transform:rotateX(-14deg) rotateY(360deg)}}
+.cube-face{position:absolute;inset:0;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:linear-gradient(155deg,rgba(212,175,55,.16),rgba(212,175,55,.03));border:1px solid rgba(212,175,55,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:inset 0 0 40px rgba(212,175,55,.12)}
 .cube-face i{font-size:1.8rem;color:var(--gold)}
 .cube-face strong{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold-light);letter-spacing:2px}
 .cube-face small{font-size:.7rem;color:#9aa5c4;letter-spacing:1px}
@@ -563,67 +219,32 @@ html[dir="ltr"] .collection-card:hover .collection-btn i{transform:translateX(6p
 .f-back{transform:rotateY(180deg) translateZ(115px)}
 .f-right{transform:rotateY(90deg) translateZ(115px)}
 .f-left{transform:rotateY(-90deg) translateZ(115px)}
-
 .testimonials{background:var(--bg-light)}
 .testi-viewport{position:relative;max-width:820px;margin:0 auto;min-height:290px}
-.testi-slide{
-  position:absolute;inset:0;opacity:0;transform:translateY(30px) scale(.97);
-  transition:opacity .7s var(--ease),transform .7s var(--ease);
-  pointer-events:none;
-  background:var(--white);border-radius:24px;padding:52px 46px;
-  border:1px solid rgba(212,175,55,.3);
-  box-shadow:var(--shadow-soft);text-align:center;
-}
+.testi-slide{position:absolute;inset:0;opacity:0;transform:translateY(30px) scale(.97);transition:opacity .7s var(--ease),transform .7s var(--ease);pointer-events:none;background:var(--white);border-radius:24px;padding:52px 46px;border:1px solid rgba(212,175,55,.3);box-shadow:var(--shadow-soft);text-align:center}
 .testi-slide.active{opacity:1;transform:none;pointer-events:auto;position:relative}
 .testi-quote-icon{font-size:2rem;color:var(--gold);opacity:.4;margin-bottom:18px}
 .testi-text{font-size:1.08rem;color:var(--text-dark);margin-bottom:26px;line-height:2}
 .testi-stars{color:var(--gold);margin-bottom:18px;letter-spacing:3px}
 .testi-person{display:flex;align-items:center;justify-content:center;gap:14px}
-.testi-avatar{
-  width:52px;height:52px;border-radius:50%;
-  background:linear-gradient(140deg,var(--navy),#1d2c58);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--gold);font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;
-  border:1px solid rgba(212,175,55,.5);
-}
+.testi-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(140deg,var(--navy),#1d2c58);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;border:1px solid rgba(212,175,55,.5)}
 .testi-name{font-weight:800;color:var(--navy);font-size:.95rem}
 .testi-role{font-size:.78rem;color:var(--text-muted)}
 .testi-dots{display:flex;justify-content:center;gap:10px;margin-top:34px}
-.testi-dot{
-  width:9px;height:9px;border-radius:50%;border:none;cursor:pointer;
-  background:rgba(10,17,40,.16);transition:var(--transition);
-}
+.testi-dot{width:9px;height:9px;border-radius:50%;border:none;cursor:pointer;background:rgba(10,17,40,.16);transition:var(--transition)}
 .testi-dot.active{width:30px;border-radius:10px;background:linear-gradient(90deg,var(--gold),var(--gold-light))}
-
-.newsletter{
-  background:linear-gradient(140deg,var(--navy),#16224a);
-  padding:90px 0;position:relative;overflow:hidden;
-}
-.newsletter::before{
-  content:'';position:absolute;top:-120px;inset-inline-end:-120px;
-  width:420px;height:420px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,175,55,.22),transparent 68%);
-  animation:drift 12s ease-in-out infinite;
-}
+.newsletter{background:linear-gradient(140deg,var(--navy),#16224a);padding:90px 0;position:relative;overflow:hidden}
+.newsletter::before{content:'';position:absolute;top:-120px;inset-inline-end:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.22),transparent 68%);animation:drift 12s ease-in-out infinite}
 .newsletter .container{position:relative;z-index:2;text-align:center}
 .newsletter h2{font-size:clamp(1.8rem,3.6vw,2.6rem);color:var(--white);margin-bottom:12px}
 .newsletter h2 em{color:var(--gold);font-style:normal}
 .newsletter p{color:#9aa5c4;margin-bottom:32px}
 .news-form{display:flex;gap:12px;max-width:560px;margin:0 auto;flex-wrap:wrap}
-.news-form input{
-  flex:1;min-width:220px;padding:16px 22px;border-radius:8px;
-  border:1px solid rgba(212,175,55,.4);background:rgba(255,255,255,.06);
-  color:var(--white);font-family:'Almarai',sans-serif;font-size:.95rem;outline:none;
-  transition:var(--transition);
-}
+.news-form input{flex:1;min-width:220px;padding:16px 22px;border-radius:8px;border:1px solid rgba(212,175,55,.4);background:rgba(255,255,255,.06);color:var(--white);font-family:'Almarai',sans-serif;font-size:.95rem;outline:none;transition:var(--transition)}
 .news-form input::placeholder{color:#7f8aab}
 .news-form input:focus{border-color:var(--gold);background:rgba(255,255,255,.1);box-shadow:0 0 0 4px rgba(212,175,55,.12)}
-
 footer{background:var(--navy-deep);padding:80px 0 28px;color:var(--white);position:relative}
-footer::before{
-  content:'';position:absolute;top:0;inset-inline-start:0;width:100%;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(212,175,55,.6),transparent);
-}
+footer::before{content:'';position:absolute;top:0;inset-inline-start:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.6),transparent)}
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:46px;margin-bottom:56px}
 .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .footer-brand svg{width:40px;height:40px}
@@ -634,72 +255,31 @@ footer::before{
 html[dir="ltr"] .footer-col a:hover{transform:translateX(6px)}
 .footer-col a i{width:16px;margin-inline-end:8px;color:var(--gold);font-size:.85rem}
 .social-icons{display:flex;gap:12px;margin-top:22px}
-.social-icons a{
-  width:44px;height:44px;border:1px solid rgba(136,146,176,.4);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;color:#8892b0;
-  transition:var(--transition);margin:0;
-}
-.social-icons a:hover{
-  background:var(--gold);border-color:var(--gold);color:var(--navy);
-  transform:translateY(-6px) rotate(8deg) scale(1.06);
-}
-.footer-bottom{
-  text-align:center;padding-top:26px;font-size:.85rem;color:#8892b0;
-  border-top:1px solid rgba(255,255,255,.06);
-}
-
-.overlay{
-  position:fixed;inset:0;background:rgba(5,9,20,.6);backdrop-filter:blur(4px);
-  opacity:0;visibility:hidden;transition:var(--transition);z-index:1400;
-}
+.social-icons a{width:44px;height:44px;border:1px solid rgba(136,146,176,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#8892b0;transition:var(--transition);margin:0}
+.social-icons a:hover{background:var(--gold);border-color:var(--gold);color:var(--navy);transform:translateY(-6px) rotate(8deg) scale(1.06)}
+.footer-bottom{text-align:center;padding-top:26px;font-size:.85rem;color:#8892b0;border-top:1px solid rgba(255,255,255,.06)}
+.overlay{position:fixed;inset:0;background:rgba(5,9,20,.6);backdrop-filter:blur(4px);opacity:0;visibility:hidden;transition:var(--transition);z-index:1400}
 .overlay.show{opacity:1;visibility:visible}
-.cart-drawer{
-  position:fixed;top:0;right:0;height:100%;width:min(420px,92vw);z-index:1500;
-  background:var(--bg-light);display:flex;flex-direction:column;
-  transform:translateX(105%);transition:transform .55s var(--ease);
-  box-shadow:-30px 0 70px rgba(0,0,0,.3);
-}
+.cart-drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,92vw);z-index:1500;background:var(--bg-light);display:flex;flex-direction:column;transform:translateX(105%);transition:transform .55s var(--ease);box-shadow:-30px 0 70px rgba(0,0,0,.3)}
 html[dir="ltr"] .cart-drawer{right:auto;left:0;transform:translateX(-105%)}
 html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
 .cart-drawer.open{transform:translateX(0)}
-.cart-head{
-  padding:24px 26px;display:flex;align-items:center;justify-content:space-between;
-  background:var(--navy);color:var(--white);
-}
+.cart-head{padding:24px 26px;display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:var(--white)}
 .cart-head h3{font-size:1.15rem;color:var(--gold);font-family:'Almarai',sans-serif;font-weight:800}
-.cart-head button{
-  background:transparent;border:none;color:var(--white);font-size:1.15rem;cursor:pointer;
-  transition:var(--transition);
-}
+.cart-head button{background:transparent;border:none;color:var(--white);font-size:1.15rem;cursor:pointer;transition:var(--transition)}
 .cart-head button:hover{color:var(--gold);transform:rotate(90deg)}
 .cart-body{flex:1;overflow-y:auto;padding:22px 26px}
 .cart-empty{text-align:center;padding:60px 10px;color:var(--text-muted)}
 .cart-empty i{font-size:3rem;color:rgba(212,175,55,.4);margin-bottom:18px;display:block}
-.cart-item{
-  display:flex;gap:14px;align-items:center;padding:14px 0;
-  border-bottom:1px solid rgba(10,17,40,.08);
-  animation:slideIn .4s var(--ease);
-}
+.cart-item{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(10,17,40,.08);animation:slideIn .4s var(--ease)}
 @keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
-.cart-item-thumb{
-  width:60px;height:60px;border-radius:12px;flex-shrink:0;
-  background:linear-gradient(150deg,var(--navy),#1d2c58);
-  display:flex;align-items:center;justify-content:center;color:var(--gold);
-  overflow:hidden;position:relative;
-}
-.cart-item-thumb img{
-  width:100%;height:100%;object-fit:cover;
-  border-radius:12px;position:relative;z-index:2;
-}
+.cart-item-thumb{width:60px;height:60px;border-radius:12px;flex-shrink:0;background:linear-gradient(150deg,var(--navy),#1d2c58);display:flex;align-items:center;justify-content:center;color:var(--gold);overflow:hidden;position:relative}
+.cart-item-thumb img{width:100%;height:100%;object-fit:cover;border-radius:12px;position:relative;z-index:2}
 .cart-item-info{flex:1;min-width:0}
 .cart-item-info strong{display:block;font-size:.9rem;color:var(--navy)}
 .cart-item-info span{font-size:.82rem;color:var(--gold-deep);font-weight:800}
 .qty-ctrl{display:flex;align-items:center;gap:8px;margin-top:6px}
-.qty-ctrl button{
-  width:24px;height:24px;border-radius:6px;border:1px solid rgba(10,17,40,.15);
-  background:transparent;cursor:pointer;color:var(--navy);font-weight:800;line-height:1;
-  transition:var(--transition);
-}
+.qty-ctrl button{width:24px;height:24px;border-radius:6px;border:1px solid rgba(10,17,40,.15);background:transparent;cursor:pointer;color:var(--navy);font-weight:800;line-height:1;transition:var(--transition)}
 .qty-ctrl button:hover{background:var(--navy);color:var(--gold);border-color:var(--navy)}
 .qty-ctrl button:disabled{opacity:.4;cursor:not-allowed}
 .qty-ctrl span{font-size:.85rem;font-weight:800;min-width:18px;text-align:center}
@@ -709,197 +289,45 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
 .cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-weight:800;color:var(--navy)}
 .cart-total strong{color:var(--gold-deep);font-size:1.25rem}
 .cart-foot .btn{width:100%}
-
-.to-top{
-  position:fixed;bottom:28px;inset-inline-end:28px;width:50px;height:50px;border-radius:50%;
-  background:var(--navy);color:var(--gold);border:1px solid rgba(212,175,55,.4);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;
-  opacity:0;visibility:hidden;transform:translateY(20px);z-index:1100;
-  transition:var(--transition);box-shadow:0 14px 34px rgba(10,17,40,.3);
-}
+.to-top{position:fixed;bottom:28px;inset-inline-end:28px;width:50px;height:50px;border-radius:50%;background:var(--navy);color:var(--gold);border:1px solid rgba(212,175,55,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;opacity:0;visibility:hidden;transform:translateY(20px);z-index:1100;transition:var(--transition);box-shadow:0 14px 34px rgba(10,17,40,.3)}
 .to-top.show{opacity:1;visibility:visible;transform:translateY(0)}
 .to-top:hover{background:var(--gold);color:var(--navy);transform:translateY(-5px) scale(1.08)}
-.toast{
-  position:fixed;bottom:32px;inset-inline-start:32px;z-index:1600;
-  display:flex;align-items:center;gap:12px;
-  padding:15px 24px;border-radius:12px;
-  background:var(--navy);color:var(--white);
-  border:1px solid rgba(212,175,55,.45);
-  box-shadow:0 20px 50px rgba(0,0,0,.35);
-  transform:translateY(120px);opacity:0;transition:var(--transition);
-  font-size:.9rem;font-weight:700;max-width:calc(100vw - 40px);
-}
+.toast{position:fixed;bottom:32px;inset-inline-start:32px;z-index:1600;display:flex;align-items:center;gap:12px;padding:15px 24px;border-radius:12px;background:var(--navy);color:var(--white);border:1px solid rgba(212,175,55,.45);box-shadow:0 20px 50px rgba(0,0,0,.35);transform:translateY(120px);opacity:0;transition:var(--transition);font-size:.9rem;font-weight:700;max-width:calc(100vw - 40px)}
 .toast.show{transform:translateY(0);opacity:1}
 .toast i{color:var(--gold);font-size:1.1rem;flex-shrink:0}
 .toast.error{border-color:rgba(224,82,82,.6)}
 .toast.error i{color:#ff8080}
 .toast.success{border-color:rgba(46,139,87,.6)}
 .toast.success i{color:#7ddba0}
-
-/* ============================================================
-   HIDDEN ADMIN ACCESS
-============================================================ */
 .brand.admin-tap{animation:brandTap .4s var(--ease)}
-@keyframes brandTap{
-  0%{transform:scale(1)}
-  50%{transform:scale(.94)}
-  100%{transform:scale(1)}
-}
-
-.secret-admin-btn{
-  position:fixed;bottom:18px;inset-inline-start:18px;
-  width:32px;height:32px;border-radius:50%;
-  background:transparent;border:none;cursor:pointer;
-  opacity:.04;z-index:999;
-  transition:all .4s var(--ease);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--gold);
-  font-size:.7rem;
-}
-.secret-admin-btn:hover{
-  opacity:.75;
-  background:rgba(212,175,55,.10);
-  transform:scale(1.15) rotate(-15deg);
-}
-@media (max-width:768px){
-  .secret-admin-btn{
-    bottom:auto;top:90px;
-    inset-inline-start:10px;
-    width:26px;height:26px;
-    opacity:.06;
-  }
-}
-
-.admin-access-modal{
-  position:fixed;inset:0;z-index:2000;
-  background:rgba(5,9,20,.82);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;
-  opacity:0;visibility:hidden;
-  transition:opacity .35s ease,visibility .35s ease;
-}
+@keyframes brandTap{0%{transform:scale(1)}50%{transform:scale(.94)}100%{transform:scale(1)}}
+.secret-admin-btn{position:fixed;bottom:18px;inset-inline-start:18px;width:32px;height:32px;border-radius:50%;background:transparent;border:none;cursor:pointer;opacity:.04;z-index:999;transition:all .4s var(--ease);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.7rem}
+.secret-admin-btn:hover{opacity:.75;background:rgba(212,175,55,.10);transform:scale(1.15) rotate(-15deg)}
+@media (max-width:768px){.secret-admin-btn{bottom:auto;top:90px;inset-inline-start:10px;width:26px;height:26px;opacity:.06}}
+.admin-access-modal{position:fixed;inset:0;z-index:2000;background:rgba(5,9,20,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease}
 .admin-access-modal.show{opacity:1;visibility:visible}
-
-.admin-access-card{
-  background:linear-gradient(155deg,#0d1730,#050914);
-  border:1px solid rgba(212,175,55,.4);
-  border-radius:22px;
-  padding:36px 32px 30px;
-  width:100%;max-width:400px;
-  text-align:center;
-  box-shadow:0 40px 100px rgba(0,0,0,.55),0 0 60px rgba(212,175,55,.15);
-  transform:scale(.92);
-  transition:transform .4s var(--ease);
-  position:relative;overflow:hidden;
-}
+.admin-access-card{background:linear-gradient(155deg,#0d1730,#050914);border:1px solid rgba(212,175,55,.4);border-radius:22px;padding:36px 32px 30px;width:100%;max-width:400px;text-align:center;box-shadow:0 40px 100px rgba(0,0,0,.55),0 0 60px rgba(212,175,55,.15);transform:scale(.92);transition:transform .4s var(--ease);position:relative;overflow:hidden}
 .admin-access-modal.show .admin-access-card{transform:scale(1)}
-
-.admin-access-card::before{
-  content:'';position:absolute;top:0;inset-inline-start:0;
-  width:100%;height:3px;
-  background:linear-gradient(90deg,var(--gold-deep),var(--gold-light),var(--gold-deep));
-}
-
-.admin-access-icon{
-  width:68px;height:68px;margin:0 auto 18px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,175,55,.25),rgba(212,175,55,.05));
-  border:1px solid rgba(212,175,55,.5);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.6rem;color:var(--gold);
-  animation:adminShield 3s ease-in-out infinite;
-}
-@keyframes adminShield{
-  0%,100%{transform:translateY(0);box-shadow:0 0 0 0 rgba(212,175,55,.4)}
-  50%{transform:translateY(-6px);box-shadow:0 0 30px 6px rgba(212,175,55,.15)}
-}
-
-.admin-access-card h3{
-  font-family:'Playfair Display',serif;
-  font-size:1.35rem;color:var(--gold);
-  letter-spacing:2px;margin-bottom:6px;
-}
-.admin-access-card p{
-  font-size:.82rem;color:#8892b0;
-  margin-bottom:24px;letter-spacing:.5px;
-}
-
-.admin-access-input{
-  width:100%;padding:14px 18px;
-  border-radius:12px;
-  border:1.5px solid rgba(212,175,55,.35);
-  background:rgba(255,255,255,.05);
-  color:#fff;font-family:'Almarai',sans-serif;
-  font-size:.95rem;font-weight:700;
-  text-align:center;letter-spacing:2px;
-  outline:none;transition:all .3s ease;
-  margin-bottom:14px;
-}
+.admin-access-card::before{content:'';position:absolute;top:0;inset-inline-start:0;width:100%;height:3px;background:linear-gradient(90deg,var(--gold-deep),var(--gold-light),var(--gold-deep))}
+.admin-access-icon{width:68px;height:68px;margin:0 auto 18px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.25),rgba(212,175,55,.05));border:1px solid rgba(212,175,55,.5);display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--gold);animation:adminShield 3s ease-in-out infinite}
+@keyframes adminShield{0%,100%{transform:translateY(0);box-shadow:0 0 0 0 rgba(212,175,55,.4)}50%{transform:translateY(-6px);box-shadow:0 0 30px 6px rgba(212,175,55,.15)}}
+.admin-access-card h3{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--gold);letter-spacing:2px;margin-bottom:6px}
+.admin-access-card p{font-size:.82rem;color:#8892b0;margin-bottom:24px;letter-spacing:.5px}
+.admin-access-input{width:100%;padding:14px 18px;border-radius:12px;border:1.5px solid rgba(212,175,55,.35);background:rgba(255,255,255,.05);color:#fff;font-family:'Almarai',sans-serif;font-size:.95rem;font-weight:700;text-align:center;letter-spacing:2px;outline:none;transition:all .3s ease;margin-bottom:14px}
 .admin-access-input::placeholder{color:#6a7490;letter-spacing:0;font-weight:400}
-.admin-access-input:focus{
-  border-color:var(--gold);
-  background:rgba(255,255,255,.08);
-  box-shadow:0 0 0 4px rgba(212,175,55,.14);
-}
-
+.admin-access-input:focus{border-color:var(--gold);background:rgba(255,255,255,.08);box-shadow:0 0 0 4px rgba(212,175,55,.14)}
 .admin-access-actions{display:flex;gap:10px}
-.admin-access-btn{
-  flex:1;
-  padding:13px 18px;border-radius:12px;
-  font-weight:800;font-size:.88rem;
-  transition:all .25s var(--ease);
-  font-family:'Almarai',sans-serif;
-  cursor:pointer;
-  border:none;
-}
-.admin-access-btn.primary{
-  background:linear-gradient(120deg,var(--gold),var(--gold-light));
-  color:var(--navy);
-  box-shadow:0 6px 18px rgba(212,175,55,.28);
-}
-.admin-access-btn.primary:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 24px rgba(212,175,55,.4);
-}
-.admin-access-btn.ghost{
-  background:transparent;
-  color:#8892b0;
-  border:1.5px solid rgba(136,146,176,.3);
-}
-.admin-access-btn.ghost:hover{
-  color:#fff;
-  border-color:#8892b0;
-}
-
-.admin-access-error{
-  display:none;
-  padding:10px 14px;border-radius:10px;
-  background:rgba(224,82,82,.12);
-  border:1px solid rgba(224,82,82,.35);
-  color:#ff9b9b;
-  font-size:.82rem;font-weight:700;
-  margin-bottom:14px;
-  animation:shake .4s ease;
-}
+.admin-access-btn{flex:1;padding:13px 18px;border-radius:12px;font-weight:800;font-size:.88rem;transition:all .25s var(--ease);font-family:'Almarai',sans-serif;cursor:pointer;border:none}
+.admin-access-btn.primary{background:linear-gradient(120deg,var(--gold),var(--gold-light));color:var(--navy);box-shadow:0 6px 18px rgba(212,175,55,.28)}
+.admin-access-btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(212,175,55,.4)}
+.admin-access-btn.ghost{background:transparent;color:#8892b0;border:1.5px solid rgba(136,146,176,.3)}
+.admin-access-btn.ghost:hover{color:#fff;border-color:#8892b0}
+.admin-access-error{display:none;padding:10px 14px;border-radius:10px;background:rgba(224,82,82,.12);border:1px solid rgba(224,82,82,.35);color:#ff9b9b;font-size:.82rem;font-weight:700;margin-bottom:14px;animation:shake .4s ease}
 .admin-access-error.show{display:block}
-@keyframes shake{
-  0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-8px)}
-  75%{transform:translateX(8px)}
-}
-
-.admin-access-hint{
-  margin-top:18px;
-  font-size:.7rem;color:#6a7490;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  letter-spacing:.5px;
-}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.admin-access-hint{margin-top:18px;font-size:.7rem;color:#6a7490;display:flex;align-items:center;justify-content:center;gap:6px;letter-spacing:.5px}
 .admin-access-hint i{color:var(--gold);font-size:.75rem}
-
-/* Responsive */
-@media (max-width:1100px){
-  .footer-grid{grid-template-columns:1fr 1fr;gap:38px}
-}
+@media (max-width:1100px){.footer-grid{grid-template-columns:1fr 1fr;gap:38px}}
 @media (max-width:992px){
   section{padding:90px 0}
   .hero{padding:130px 0 70px}
@@ -921,12 +349,7 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
 }
 @media (max-width:768px){
   .menu-toggle{display:flex}
-  .nav-links{
-    position:fixed;top:0;inset-inline-end:-100%;width:82%;height:100vh;
-    background:var(--bg-light);flex-direction:column;justify-content:center;
-    gap:30px;transition:inset-inline-end .55s var(--ease);
-    box-shadow:-20px 0 60px rgba(0,0,0,.15);z-index:1300;
-  }
+  .nav-links{position:fixed;top:0;inset-inline-end:-100%;width:82%;height:100vh;background:var(--bg-light);flex-direction:column;justify-content:center;gap:30px;transition:inset-inline-end .55s var(--ease);box-shadow:-20px 0 60px rgba(0,0,0,.15);z-index:1300}
   .nav-links.active{inset-inline-end:0}
   .nav-links a{font-size:1.35rem}
   .section-header h2{font-size:1.9rem}
@@ -959,36 +382,24 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
   .f-right{transform:rotateY(90deg) translateZ(95px)}
   .f-left{transform:rotateY(-90deg) translateZ(95px)}
 }
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
-}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}}
 </style>
-
-
-
-<link rel="stylesheet" href="mobile.css">
 </head>
 <body>
 
-<!-- SVG logo -->
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
   <defs>
     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f9edc4"/>
-      <stop offset="28%" stop-color="#d4af37"/>
-      <stop offset="52%" stop-color="#f4e4bc"/>
-      <stop offset="78%" stop-color="#c9a227"/>
+      <stop offset="0%" stop-color="#f9edc4"/><stop offset="28%" stop-color="#d4af37"/>
+      <stop offset="52%" stop-color="#f4e4bc"/><stop offset="78%" stop-color="#c9a227"/>
       <stop offset="100%" stop-color="#8f6b12"/>
     </linearGradient>
   </defs>
   <symbol id="logo-mark" viewBox="0 0 220 220">
     <g stroke="url(#goldGrad)" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="95" y="10" width="30" height="17" rx="4"/>
-      <path d="M104 27v23M116 27v23"/>
-      <circle cx="110" cy="118" r="62"/>
-      <path d="M68 178 L152 58"/>
-      <circle cx="87" cy="96" r="15"/>
-      <circle cx="133" cy="140" r="15"/>
+      <rect x="95" y="10" width="30" height="17" rx="4"/><path d="M104 27v23M116 27v23"/>
+      <circle cx="110" cy="118" r="62"/><path d="M68 178 L152 58"/>
+      <circle cx="87" cy="96" r="15"/><circle cx="133" cy="140" r="15"/>
       <path d="M60 70 C 24 96, 24 152, 62 180" stroke-width="5"/>
     </g>
     <g fill="url(#goldGrad)">
@@ -1001,7 +412,6 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
   </symbol>
 </svg>
 
-<!-- Preloader -->
 <div id="preloader">
   <svg class="pre-logo"><use href="#logo-mark"/></svg>
   <div class="pre-bar"><span></span></div>
@@ -1012,17 +422,12 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- Header -->
 <header id="header">
   <div class="container nav-container">
     <a href="#home" class="brand">
       <svg class="brand-mark"><use href="#logo-mark"/></svg>
-      <span class="brand-text">
-        <span class="brand-name">PERCENT</span>
-        <span class="brand-sub">PERFUME</span>
-      </span>
+      <span class="brand-text"><span class="brand-name">PERCENT</span><span class="brand-sub">PERFUME</span></span>
     </a>
-
     <nav class="nav-links" id="navLinks">
       <a href="#home"><span class="lang-ar">الرئيسية</span><span class="lang-en">Home</span></a>
       <a href="women.html"><span class="lang-ar">عطور نسائية</span><span class="lang-en">Women</span></a>
@@ -1031,7 +436,6 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
       <a href="#bestsellers"><span class="lang-ar">الأكثر مبيعاً</span><span class="lang-en">Bestsellers</span></a>
       <a href="loyalty.html"><span class="lang-ar">نظام الولاء</span><span class="lang-en">Loyalty</span></a>
     </nav>
-
     <div class="nav-icons">
       <button class="lang-switch" id="langBtn">EN</button>
       <button class="icon-btn" id="searchBtn" aria-label="Search"><i class="fas fa-search"></i></button>
@@ -1044,12 +448,10 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
   </div>
 </header>
 
-<!-- Hero -->
 <section class="hero" id="home">
   <div class="hero-orb o1"></div>
   <div class="hero-orb o2"></div>
   <div class="particles" id="particles"></div>
-
   <div class="container hero-grid">
     <div class="hero-text">
       <span class="hero-badge">
@@ -1057,67 +459,32 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
         <span class="lang-ar">عطور فاخرة · زيوت أصلية</span>
         <span class="lang-en">Luxury Perfumes · Original Oils</span>
       </span>
-
       <h1 class="hero-title english-text">
         <span class="line"><span>PERCENT</span></span>
         <span class="line"><span class="gold-text">PERFUME</span></span>
       </h1>
-
       <p class="hero-tagline">
         <span class="lang-ar">« كُلُّ عَبيرٍ يَحكي حِكايَة »</span>
         <span class="lang-en">"Every Scent Tells a Story"</span>
       </p>
-
-      <p class="hero-desc lang-ar">
-        نبتكر لك عطوراً فاخرة تُروي تفاصيلك وتترك أثراً لا يُنسى.
-        اكتشف مجموعتنا الحصرية من أرقى الزيوت العطرية العالمية، بثبات يدوم طوال اليوم.
-      </p>
-      <p class="hero-desc lang-en">
-        We craft luxury perfumes that tell your story and leave an unforgettable
-        impression. Discover our exclusive collection of the finest global fragrance
-        oils, with a lasting power that stays all day.
-      </p>
-
+      <p class="hero-desc lang-ar">نبتكر لك عطوراً فاخرة تُروي تفاصيلك وتترك أثراً لا يُنسى. اكتشف مجموعتنا الحصرية من أرقى الزيوت العطرية العالمية، بثبات يدوم طوال اليوم.</p>
+      <p class="hero-desc lang-en">We craft luxury perfumes that tell your story and leave an unforgettable impression. Discover our exclusive collection of the finest global fragrance oils, with a lasting power that stays all day.</p>
       <div class="hero-actions">
-        <a href="women.html" class="btn">
-          <i class="fas fa-spa"></i>
-          <span class="lang-ar">تسوّقي الآن</span>
-          <span class="lang-en">Shop Women</span>
-        </a>
-        <a href="men.html" class="btn btn-outline">
-          <i class="fas fa-gem"></i>
-          <span class="lang-ar">تسوّق الآن</span>
-          <span class="lang-en">Shop Men</span>
-        </a>
+        <a href="women.html" class="btn"><i class="fas fa-spa"></i><span class="lang-ar">تسوّقي الآن</span><span class="lang-en">Shop Women</span></a>
+        <a href="men.html" class="btn btn-outline"><i class="fas fa-gem"></i><span class="lang-ar">تسوّق الآن</span><span class="lang-en">Shop Men</span></a>
       </div>
     </div>
-
     <div class="hero-visual">
       <div class="halo"></div>
       <div class="halo-ring"></div>
-      <div class="hero-card" id="heroCard">
-        <svg><use href="#logo-mark"/></svg>
-      </div>
-      <span class="float-chip chip-1">
-        <i class="fas fa-certificate"></i>
-        <span class="lang-ar">100% زيوت أصلية</span>
-        <span class="lang-en">100% Pure Oils</span>
-      </span>
-      <span class="float-chip chip-2">
-        <i class="fas fa-clock"></i>
-        <span class="lang-ar">ثبات 24 ساعة</span>
-        <span class="lang-en">24h Longevity</span>
-      </span>
-      <span class="float-chip chip-3">
-        <i class="fas fa-truck-fast"></i>
-        <span class="lang-ar">توصيل سريع</span>
-        <span class="lang-en">Fast Delivery</span>
-      </span>
+      <div class="hero-card" id="heroCard"><svg><use href="#logo-mark"/></svg></div>
+      <span class="float-chip chip-1"><i class="fas fa-certificate"></i><span class="lang-ar">100% زيوت أصلية</span><span class="lang-en">100% Pure Oils</span></span>
+      <span class="float-chip chip-2"><i class="fas fa-clock"></i><span class="lang-ar">ثبات 24 ساعة</span><span class="lang-en">24h Longevity</span></span>
+      <span class="float-chip chip-3"><i class="fas fa-truck-fast"></i><span class="lang-ar">توصيل سريع</span><span class="lang-en">Fast Delivery</span></span>
     </div>
   </div>
 </section>
 
-<!-- Marquee -->
 <div class="marquee">
   <div class="marquee-track" id="marqueeTrack">
     <div class="marquee-item">
@@ -1131,315 +498,86 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
   </div>
 </div>
 
-<!-- Collections -->
 <section class="collections" id="collections">
   <div class="container">
     <div class="section-header center" data-reveal>
-      <span class="section-eyebrow">
-        <span class="lang-ar">تسوّق حسب الفئة</span>
-        <span class="lang-en">Shop by Category</span>
-      </span>
-      <h2>
-        <span class="lang-ar">اختر <span class="gold-text">مجموعتك</span></span>
-        <span class="lang-en">Choose Your <span class="gold-text">Collection</span></span>
-      </h2>
-      <p>
-        <span class="lang-ar">مجموعات مصممة بعناية لتناسب شخصيتك وذوقك الرفيع.</span>
-        <span class="lang-en">Carefully crafted collections to match your personality and refined taste.</span>
-      </p>
+      <span class="section-eyebrow"><span class="lang-ar">تسوّق حسب الفئة</span><span class="lang-en">Shop by Category</span></span>
+      <h2><span class="lang-ar">اختر <span class="gold-text">مجموعتك</span></span><span class="lang-en">Choose Your <span class="gold-text">Collection</span></span></h2>
+      <p><span class="lang-ar">مجموعات مصممة بعناية لتناسب شخصيتك وذوقك الرفيع.</span><span class="lang-en">Carefully crafted collections to match your personality and refined taste.</span></p>
     </div>
-
     <div class="collections-grid">
       <div class="collection-card tilt-card" data-reveal="left" onclick="location.href='women.html'">
         <i class="fas fa-spa collection-icon"></i>
-        <h3 class="collection-title">
-          <span class="lang-ar">عطور نسائية</span>
-          <span class="lang-en">Women's Perfumes</span>
-        </h3>
-        <p class="collection-desc">
-          <span class="lang-ar">زهور، فواكه، ومسك ناعم يلامس الأنوثة</span>
-          <span class="lang-en">Floral, Fruity & Soft Musk</span>
-        </p>
-        <button class="collection-btn">
-          <span class="lang-ar">اكتشفي المزيد</span>
-          <span class="lang-en">Discover More</span>
-          <i class="fas fa-arrow-left"></i>
-        </button>
+        <h3 class="collection-title"><span class="lang-ar">عطور نسائية</span><span class="lang-en">Women's Perfumes</span></h3>
+        <p class="collection-desc"><span class="lang-ar">زهور، فواكه، ومسك ناعم يلامس الأنوثة</span><span class="lang-en">Floral, Fruity & Soft Musk</span></p>
+        <button class="collection-btn"><span class="lang-ar">اكتشفي المزيد</span><span class="lang-en">Discover More</span><i class="fas fa-arrow-left"></i></button>
       </div>
-
       <div class="collection-card tilt-card" data-reveal="right" onclick="location.href='men.html'">
         <i class="fas fa-gem collection-icon"></i>
-        <h3 class="collection-title">
-          <span class="lang-ar">عطور رجالية</span>
-          <span class="lang-en">Men's Perfumes</span>
-        </h3>
-        <p class="collection-desc">
-          <span class="lang-ar">عود، عنبر، وتوابل شرقية بحضور قوي</span>
-          <span class="lang-en">Oud, Amber & Oriental Spices</span>
-        </p>
-        <button class="collection-btn">
-          <span class="lang-ar">اكتشف المزيد</span>
-          <span class="lang-en">Discover More</span>
-          <i class="fas fa-arrow-left"></i>
-        </button>
+        <h3 class="collection-title"><span class="lang-ar">عطور رجالية</span><span class="lang-en">Men's Perfumes</span></h3>
+        <p class="collection-desc"><span class="lang-ar">عود، عنبر، وتوابل شرقية بحضور قوي</span><span class="lang-en">Oud, Amber & Oriental Spices</span></p>
+        <button class="collection-btn"><span class="lang-ar">اكتشف المزيد</span><span class="lang-en">Discover More</span><i class="fas fa-arrow-left"></i></button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Story -->
 <section class="story" id="story">
   <div class="container story-wrap">
     <div class="story-visual" data-reveal="left">
-      <div class="story-frame">
-        <div class="frame-line"></div>
-        <svg><use href="#logo-mark"/></svg>
-      </div>
+      <div class="story-frame"><div class="frame-line"></div><svg><use href="#logo-mark"/></svg></div>
     </div>
-
     <div class="story-content" data-reveal="right">
-      <span class="section-eyebrow">
-        <span class="lang-ar">من نحن</span>
-        <span class="lang-en">Who We Are</span>
-      </span>
-      <h2>
-        <span class="lang-ar">قصتنا</span>
-        <span class="lang-en">Our Story</span>
-      </h2>
-
-      <p class="lang-ar">
-        بدأت رحلة «PERCENT» من شغفٍ عميق بالعطور الفاخرة. أردنا أن نبتكر عطوراً لا تكون
-        مجرد رائحة، بل تجربة متكاملة تروي قصة كل شخص.
-      </p>
-      <p class="lang-ar">
-        نختار مكوناتنا بعناية فائقة من أرقى المصادر العالمية، لنقدّم لك عطوراً تدوم
-        وتترك أثراً لا يُنسى في كل مناسبة.
-      </p>
-
-      <p class="lang-en">
-        The journey of "PERCENT" began from a deep passion for luxury perfumes.
-        We wanted to create scents that are not just a smell, but a complete
-        experience that tells everyone's story.
-      </p>
-      <p class="lang-en">
-        We carefully select our ingredients from the finest global sources to bring
-        you long-lasting perfumes that leave an unforgettable impression.
-      </p>
-
-      <blockquote class="story-quote">
-        <span class="lang-ar">« كُلُّ عَبيرٍ يَحكي حِكايَة »</span>
-        <span class="lang-en">"Every Scent Tells a Story"</span>
-      </blockquote>
-
+      <span class="section-eyebrow"><span class="lang-ar">من نحن</span><span class="lang-en">Who We Are</span></span>
+      <h2><span class="lang-ar">قصتنا</span><span class="lang-en">Our Story</span></h2>
+      <p class="lang-ar">بدأت رحلة «PERCENT» من شغفٍ عميق بالعطور الفاخرة. أردنا أن نبتكر عطوراً لا تكون مجرد رائحة، بل تجربة متكاملة تروي قصة كل شخص.</p>
+      <p class="lang-ar">نختار مكوناتنا بعناية فائقة من أرقى المصادر العالمية، لنقدّم لك عطوراً تدوم وتترك أثراً لا يُنسى في كل مناسبة.</p>
+      <p class="lang-en">The journey of "PERCENT" began from a deep passion for luxury perfumes. We wanted to create scents that are not just a smell, but a complete experience that tells everyone's story.</p>
+      <p class="lang-en">We carefully select our ingredients from the finest global sources to bring you long-lasting perfumes that leave an unforgettable impression.</p>
+      <blockquote class="story-quote"><span class="lang-ar">« كُلُّ عَبيرٍ يَحكي حِكايَة »</span><span class="lang-en">"Every Scent Tells a Story"</span></blockquote>
       <div class="stats">
-        <div class="stat">
-          <div class="stat-num"><span class="counter" data-target="5000">0</span><span>+</span></div>
-          <div class="stat-label">
-            <span class="lang-ar">عميل سعيد</span>
-            <span class="lang-en">Happy Clients</span>
-          </div>
-        </div>
-        <div class="stat">
-          <div class="stat-num"><span class="counter" data-target="120">0</span><span>+</span></div>
-          <div class="stat-label">
-            <span class="lang-ar">عطر مميز</span>
-            <span class="lang-en">Unique Scents</span>
-          </div>
-        </div>
-        <div class="stat">
-          <div class="stat-num"><span class="counter" data-target="99">0</span><span>%</span></div>
-          <div class="stat-label">
-            <span class="lang-ar">رضا العملاء</span>
-            <span class="lang-en">Satisfaction</span>
-          </div>
-        </div>
+        <div class="stat"><div class="stat-num"><span class="counter" data-target="5000">0</span><span>+</span></div><div class="stat-label"><span class="lang-ar">عميل سعيد</span><span class="lang-en">Happy Clients</span></div></div>
+        <div class="stat"><div class="stat-num"><span class="counter" data-target="120">0</span><span>+</span></div><div class="stat-label"><span class="lang-ar">عطر مميز</span><span class="lang-en">Unique Scents</span></div></div>
+        <div class="stat"><div class="stat-num"><span class="counter" data-target="99">0</span><span>%</span></div><div class="stat-label"><span class="lang-ar">رضا العملاء</span><span class="lang-en">Satisfaction</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Bestsellers -->
 <section class="bestsellers" id="bestsellers">
   <div class="container">
     <div class="section-header center" data-reveal>
-      <span class="section-eyebrow">
-        <span class="lang-ar">المفضلة لدى عملائنا</span>
-        <span class="lang-en">Customer Favorites</span>
-      </span>
-      <h2>
-        <span class="lang-ar">الأكثر <span class="gold-text">مبيعاً</span></span>
-        <span class="lang-en"><span class="gold-text">Best</span> Sellers</span>
-      </h2>
-      <p>
-        <span class="lang-ar">العطور التي أحبها عملاؤنا أكثر من غيرها.</span>
-        <span class="lang-en">The scents our customers love the most.</span>
-      </p>
+      <span class="section-eyebrow"><span class="lang-ar">المفضلة لدى عملائنا</span><span class="lang-en">Customer Favorites</span></span>
+      <h2><span class="lang-ar">الأكثر <span class="gold-text">مبيعاً</span></span><span class="lang-en"><span class="gold-text">Best</span> Sellers</span></h2>
+      <p><span class="lang-ar">العطور التي أحبها عملاؤنا أكثر من غيرها.</span><span class="lang-en">The scents our customers love the most.</span></p>
     </div>
-
-    <div class="products-grid">
-
-      <!-- 1. YSL Libre (نسائي) -->
-      <article class="product-card tilt-card" data-reveal
-               data-name="yves-saint-laurent-libre"
-               data-image="woamen/1.jpeg"
-               data-category="Yves Saint Laurent"
-               data-price="50"
-               data-name-ar="إيف سان لوران ليبر"
-               data-name-en="Yves Saint Laurent Libre">
-        <div class="product-media">
-          <svg class="media-placeholder"><use href="#logo-mark"/></svg>
-          <img class="media-img" src="woamen/1.jpeg" alt="YSL Libre" loading="lazy" onerror="this.remove()">
-          <span class="product-tag"><span class="lang-ar">الأكثر طلباً</span><span class="lang-en">TOP</span></span>
-        </div>
-        <h3 class="product-title"><span class="lang-ar">إيف سان لوران ليبر</span><span class="lang-en">YSL Libre</span></h3>
-        <p class="product-sub english-text">YVES SAINT LAURENT LIBRE</p>
-        <div class="stars">★★★★★</div>
-        <div class="product-price"><span class="price-now">50.00 JOD</span></div>
-        <button class="add-to-cart">
-          <i class="fas fa-bag-shopping"></i>
-          <span class="lang-ar">أضف إلى السلة</span>
-          <span class="lang-en">Add to Cart</span>
-        </button>
-      </article>
-
-      <!-- 2. Dior Sport (رجالي) -->
-      <article class="product-card tilt-card" data-reveal style="--d:.1s"
-               data-name="dior-sport"
-               data-image="men/10.jpeg"
-               data-category="Dior"
-               data-price="85"
-               data-name-ar="ديور سبورت"
-               data-name-en="Dior Sport">
-        <div class="product-media">
-          <svg class="media-placeholder"><use href="#logo-mark"/></svg>
-          <img class="media-img" src="men/10.jpeg" alt="Dior Sport" loading="lazy" onerror="this.remove()">
-          <span class="product-tag"><span class="lang-ar">الأكثر طلباً</span><span class="lang-en">TOP</span></span>
-        </div>
-        <h3 class="product-title"><span class="lang-ar">ديور سبورت</span><span class="lang-en">Dior Sport</span></h3>
-        <p class="product-sub english-text">DIOR SPORT</p>
-        <div class="stars">★★★★★</div>
-        <div class="product-price"><span class="price-now">85.00 JOD</span></div>
-        <button class="add-to-cart">
-          <i class="fas fa-bag-shopping"></i>
-          <span class="lang-ar">أضف إلى السلة</span>
-          <span class="lang-en">Add to Cart</span>
-        </button>
-      </article>
-
-      <!-- 3. YSL Black Opium (نسائي) -->
-      <article class="product-card tilt-card" data-reveal style="--d:.2s"
-               data-name="yves-saint-laurent-black-opium"
-               data-image="woamen/2.jpeg"
-               data-category="Yves Saint Laurent"
-               data-price="50"
-               data-name-ar="إيف سان لوران بلاك أوبيوم"
-               data-name-en="Yves Saint Laurent Black Opium">
-        <div class="product-media">
-          <svg class="media-placeholder"><use href="#logo-mark"/></svg>
-          <img class="media-img" src="woamen/2.jpeg" alt="Black Opium" loading="lazy" onerror="this.remove()">
-          <span class="product-tag sale"><span class="lang-ar">مميز</span><span class="lang-en">HOT</span></span>
-        </div>
-        <h3 class="product-title"><span class="lang-ar">إيف سان لوران بلاك أوبيوم</span><span class="lang-en">YSL Black Opium</span></h3>
-        <p class="product-sub english-text">YVES SAINT LAURENT BLACK OPIUM</p>
-        <div class="stars">★★★★★</div>
-        <div class="product-price"><span class="price-now">50.00 JOD</span></div>
-        <button class="add-to-cart">
-          <i class="fas fa-bag-shopping"></i>
-          <span class="lang-ar">أضف إلى السلة</span>
-          <span class="lang-en">Add to Cart</span>
-        </button>
-      </article>
-
-      <!-- 4. Stronger With You (رجالي) -->
-      <article class="product-card tilt-card" data-reveal style="--d:.3s"
-               data-name="emporio-armani-stronger-with-you"
-               data-image="men/18.jpeg"
-               data-category="Emporio Armani"
-               data-price="65"
-               data-name-ar="إمبوريو أرماني سترونجر ويذ يو"
-               data-name-en="Emporio Armani Stronger With You">
-        <div class="product-media">
-          <svg class="media-placeholder"><use href="#logo-mark"/></svg>
-          <img class="media-img" src="men/18.jpeg" alt="Stronger With You" loading="lazy" onerror="this.remove()">
-          <span class="product-tag sale"><span class="lang-ar">جديد</span><span class="lang-en">NEW</span></span>
-        </div>
-        <h3 class="product-title"><span class="lang-ar">إمبوريو أرماني سترونجر ويذ يو</span><span class="lang-en">Stronger With You</span></h3>
-        <p class="product-sub english-text">EMPORIO ARMANI STRONGER WITH YOU</p>
-        <div class="stars">★★★★★</div>
-        <div class="product-price"><span class="price-now">65.00 JOD</span></div>
-        <button class="add-to-cart">
-          <i class="fas fa-bag-shopping"></i>
-          <span class="lang-ar">أضف إلى السلة</span>
-          <span class="lang-en">Add to Cart</span>
-        </button>
-      </article>
-
-    </div>
+    <div class="products-grid" id="bestsellersGrid"></div>
   </div>
 </section>
 
-<!-- Loyalty -->
 <section class="loyalty" id="loyalty">
   <div class="container">
     <div class="loyalty-grid">
       <div data-reveal="right">
-        <span class="section-eyebrow">
-          <span class="lang-ar">برنامج المكافآت</span>
-          <span class="lang-en">Rewards Program</span>
-        </span>
+        <span class="section-eyebrow"><span class="lang-ar">برنامج المكافآت</span><span class="lang-en">Rewards Program</span></span>
         <h2 class="english-text gold-text">PERCENT CLUB</h2>
-
-        <p class="lang-ar">
-          انضم إلى نادي «بيرسنت» واحصل على نقاط مع كل عملية شراء، وتمتّع بخصومات
-          حصرية وعروض خاصة لأعضائنا الكرام، مع هدايا في مناسباتك الخاصة.
-        </p>
-        <p class="lang-en">
-          Join Percent Club and earn points with every purchase. Enjoy exclusive
-          discounts and special offers for our valued members, plus gifts on your
-          special occasions.
-        </p>
-
+        <p class="lang-ar">انضم إلى نادي «بيرسنت» واحصل على نقاط مع كل عملية شراء، وتمتّع بخصومات حصرية وعروض خاصة لأعضائنا الكرام، مع هدايا في مناسباتك الخاصة.</p>
+        <p class="lang-en">Join Percent Club and earn points with every purchase. Enjoy exclusive discounts and special offers for our valued members, plus gifts on your special occasions.</p>
         <div class="loyalty-perks">
           <span class="perk"><i class="fas fa-coins"></i><span class="lang-ar">نقاط مع كل شراء</span><span class="lang-en">Points per purchase</span></span>
           <span class="perk"><i class="fas fa-percent"></i><span class="lang-ar">خصومات حصرية</span><span class="lang-en">Exclusive discounts</span></span>
           <span class="perk"><i class="fas fa-gift"></i><span class="lang-ar">هدايا المناسبات</span><span class="lang-en">Occasion gifts</span></span>
           <span class="perk"><i class="fas fa-bolt"></i><span class="lang-ar">وصول مبكر للعروض</span><span class="lang-en">Early access</span></span>
         </div>
-
-        <a href="loyalty.html" class="btn btn-gold">
-          <i class="fas fa-crown"></i>
-          <span class="lang-ar">انضم الآن مجاناً</span>
-          <span class="lang-en">Join Now for Free</span>
-        </a>
+        <a href="loyalty.html" class="btn btn-gold"><i class="fas fa-crown"></i><span class="lang-ar">انضم الآن مجاناً</span><span class="lang-en">Join Now for Free</span></a>
       </div>
-
       <div data-reveal="left">
         <div class="cube-stage">
           <div class="cube">
-            <div class="cube-face f-front">
-              <i class="fas fa-medal"></i>
-              <strong>BRONZE</strong>
-              <small class="lang-ar">من 0 نقطة</small>
-              <small class="lang-en">From 0 pts</small>
-            </div>
-            <div class="cube-face f-right">
-              <i class="fas fa-award"></i>
-              <strong>SILVER</strong>
-              <small class="lang-ar">من 1000 نقطة</small>
-              <small class="lang-en">From 1000 pts</small>
-            </div>
-            <div class="cube-face f-back">
-              <i class="fas fa-crown"></i>
-              <strong>GOLD</strong>
-              <small class="lang-ar">من 3000 نقطة</small>
-              <small class="lang-en">From 3000 pts</small>
-            </div>
-            <div class="cube-face f-left">
-              <i class="fas fa-gem"></i>
-              <strong>PERCENT</strong>
-              <small class="lang-ar">من 7000 نقطة</small>
-              <small class="lang-en">From 7000 pts</small>
-            </div>
+            <div class="cube-face f-front"><i class="fas fa-medal"></i><strong>BRONZE</strong><small class="lang-ar">من 0 نقطة</small><small class="lang-en">From 0 pts</small></div>
+            <div class="cube-face f-right"><i class="fas fa-award"></i><strong>SILVER</strong><small class="lang-ar">من 1000 نقطة</small><small class="lang-en">From 1000 pts</small></div>
+            <div class="cube-face f-back"><i class="fas fa-crown"></i><strong>GOLD</strong><small class="lang-ar">من 3000 نقطة</small><small class="lang-en">From 3000 pts</small></div>
+            <div class="cube-face f-left"><i class="fas fa-gem"></i><strong>PERCENT</strong><small class="lang-ar">من 7000 نقطة</small><small class="lang-en">From 7000 pts</small></div>
           </div>
         </div>
       </div>
@@ -1447,124 +585,67 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
   </div>
 </section>
 
-<!-- Testimonials -->
 <section class="testimonials">
   <div class="container">
     <div class="section-header center" data-reveal>
-      <span class="section-eyebrow">
-        <span class="lang-ar">آراء عملائنا</span>
-        <span class="lang-en">Testimonials</span>
-      </span>
-      <h2>
-        <span class="lang-ar">ماذا يقولون <span class="gold-text">عنا</span></span>
-        <span class="lang-en">What They <span class="gold-text">Say</span></span>
-      </h2>
+      <span class="section-eyebrow"><span class="lang-ar">آراء عملائنا</span><span class="lang-en">Testimonials</span></span>
+      <h2><span class="lang-ar">ماذا يقولون <span class="gold-text">عنا</span></span><span class="lang-en">What They <span class="gold-text">Say</span></span></h2>
     </div>
-
     <div class="testi-viewport" id="testiViewport" data-reveal="zoom">
-
       <div class="testi-slide active">
         <i class="fas fa-quote-right testi-quote-icon"></i>
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text lang-ar">«جودة العطور مذهلة والثبات يفوق التوقعات. عطر رويال عود أصبح توقيعي الخاص، وكل من يقابلني يسألني عنه.»</p>
         <p class="testi-text lang-en">"The quality is amazing and the longevity exceeds expectations. Royal Oud became my signature scent — everyone asks me about it."</p>
-        <div class="testi-person">
-          <div class="testi-avatar">A</div>
-          <div>
-            <div class="testi-name"><span class="lang-ar">أحمد المومني</span><span class="lang-en">Ahmad Al-Momani</span></div>
-            <div class="testi-role"><span class="lang-ar">عميل دائم · عمّان</span><span class="lang-en">Loyal Customer · Amman</span></div>
-          </div>
-        </div>
+        <div class="testi-person"><div class="testi-avatar">A</div><div><div class="testi-name"><span class="lang-ar">أحمد المومني</span><span class="lang-en">Ahmad Al-Momani</span></div><div class="testi-role"><span class="lang-ar">عميل دائم · عمّان</span><span class="lang-en">Loyal Customer · Amman</span></div></div></div>
       </div>
-
       <div class="testi-slide">
         <i class="fas fa-quote-right testi-quote-icon"></i>
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text lang-ar">«التغليف راقٍ جداً والرائحة ناعمة وأنثوية. طلبت ثلاث عطور وأنا سعيدة جداً بالنتيجة. خدمة العملاء ممتازة وسريعة.»</p>
         <p class="testi-text lang-en">"The packaging is so elegant and the scent is soft and feminine. I ordered three perfumes and I'm thrilled. Customer service is excellent."</p>
-        <div class="testi-person">
-          <div class="testi-avatar">L</div>
-          <div>
-            <div class="testi-name"><span class="lang-ar">لينا حدّاد</span><span class="lang-en">Lina Haddad</span></div>
-            <div class="testi-role"><span class="lang-ar">عميلة · إربد</span><span class="lang-en">Customer · Irbid</span></div>
-          </div>
-        </div>
+        <div class="testi-person"><div class="testi-avatar">L</div><div><div class="testi-name"><span class="lang-ar">لينا حدّاد</span><span class="lang-en">Lina Haddad</span></div><div class="testi-role"><span class="lang-ar">عميلة · إربد</span><span class="lang-en">Customer · Irbid</span></div></div></div>
       </div>
-
       <div class="testi-slide">
         <i class="fas fa-quote-right testi-quote-icon"></i>
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text lang-ar">«أفضل تجربة شراء عطور مررت بها. الأسعار منافسة جداً مقارنة بالجودة، والتوصيل وصلني في نفس اليوم. أنصح الجميع بتجربتهم.»</p>
         <p class="testi-text lang-en">"Best perfume shopping experience I've had. Prices are very competitive for the quality, and delivery arrived the same day. Highly recommended."</p>
-        <div class="testi-person">
-          <div class="testi-avatar">O</div>
-          <div>
-            <div class="testi-name"><span class="lang-ar">عمر الزعبي</span><span class="lang-en">Omar Al-Zoubi</span></div>
-            <div class="testi-role"><span class="lang-ar">عميل · الزرقاء</span><span class="lang-en">Customer · Zarqa</span></div>
-          </div>
-        </div>
+        <div class="testi-person"><div class="testi-avatar">O</div><div><div class="testi-name"><span class="lang-ar">عمر الزعبي</span><span class="lang-en">Omar Al-Zoubi</span></div><div class="testi-role"><span class="lang-ar">عميل · الزرقاء</span><span class="lang-en">Customer · Zarqa</span></div></div></div>
       </div>
-
     </div>
-
     <div class="testi-dots" id="testiDots"></div>
   </div>
 </section>
 
-<!-- Newsletter -->
 <section class="newsletter">
   <div class="container" data-reveal>
-    <h2>
-      <span class="lang-ar">اشترك في <em>النشرة البريدية</em></span>
-      <span class="lang-en">Subscribe to our <em>Newsletter</em></span>
-    </h2>
-    <p>
-      <span class="lang-ar">كن أول من يعرف عن العروض الجديدة والمنتجات الحصرية.</span>
-      <span class="lang-en">Be the first to know about new offers and exclusive products.</span>
-    </p>
+    <h2><span class="lang-ar">اشترك في <em>النشرة البريدية</em></span><span class="lang-en">Subscribe to our <em>Newsletter</em></span></h2>
+    <p><span class="lang-ar">كن أول من يعرف عن العروض الجديدة والمنتجات الحصرية.</span><span class="lang-en">Be the first to know about new offers and exclusive products.</span></p>
     <form class="news-form" id="newsForm">
       <input type="email" required placeholder="بريدك الإلكتروني / Your email">
-      <button type="submit" class="btn btn-gold">
-        <i class="fas fa-paper-plane"></i>
-        <span class="lang-ar">اشترك</span>
-        <span class="lang-en">Subscribe</span>
-      </button>
+      <button type="submit" class="btn btn-gold"><i class="fas fa-paper-plane"></i><span class="lang-ar">اشترك</span><span class="lang-en">Subscribe</span></button>
     </form>
   </div>
 </section>
 
-<!-- Footer -->
 <footer id="contact">
   <div class="container">
     <div class="footer-grid">
-
       <div class="footer-col" data-reveal>
         <div class="footer-brand">
           <svg><use href="#logo-mark"/></svg>
-          <span class="brand-text">
-            <span class="brand-name">PERCENT</span>
-            <span class="brand-sub">PERFUME</span>
-          </span>
+          <span class="brand-text"><span class="brand-name">PERCENT</span><span class="brand-sub">PERFUME</span></span>
         </div>
         <p class="lang-ar">عطور فاخرة تروي تفاصيلك. جودة عالية وأسعار منافسة.</p>
         <p class="lang-en">Luxury perfumes that tell your story. High quality and competitive prices.</p>
-       <div class="social-icons">
-  <a href="https://www.instagram.com/percent._.perfume/"
-     target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
-  <a href="#" aria-label="Facebook" onclick="return false;">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-  <a href="#" aria-label="TikTok" onclick="return false;">
-    <i class="fab fa-tiktok"></i>
-  </a>
-  <a href="#" aria-label="WhatsApp" onclick="return false;">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-</div>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/percent._.perfume/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook" onclick="return false;"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="TikTok" onclick="return false;"><i class="fab fa-tiktok"></i></a>
+          <a href="#" aria-label="WhatsApp" onclick="return false;"><i class="fab fa-whatsapp"></i></a>
+        </div>
       </div>
-
       <div class="footer-col" data-reveal style="--d:.1s">
         <h3><span class="lang-ar">روابط سريعة</span><span class="lang-en">Quick Links</span></h3>
         <a href="#home"><i class="fas fa-chevron-left"></i><span class="lang-ar">الرئيسية</span><span class="lang-en">Home</span></a>
@@ -1573,7 +654,6 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
         <a href="#bestsellers"><i class="fas fa-chevron-left"></i><span class="lang-ar">الأكثر مبيعاً</span><span class="lang-en">Bestsellers</span></a>
         <a href="loyalty.html"><i class="fas fa-chevron-left"></i><span class="lang-ar">نظام الولاء</span><span class="lang-en">Loyalty Program</span></a>
       </div>
-
       <div class="footer-col">
         <h3><span class="lang-ar">خدمة العملاء</span><span class="lang-en">Customer Care</span></h3>
         <a href="customer-service.html"><i class="fas fa-truck"></i><span class="lang-ar">سياسة التوصيل</span><span class="lang-en">Shipping Policy</span></a>
@@ -1581,7 +661,6 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
         <a href="customer-service.html"><i class="fas fa-shield-halved"></i><span class="lang-ar">سياسة الخصوصية</span><span class="lang-en">Privacy Policy</span></a>
         <a href="customer-service.html"><i class="fas fa-circle-question"></i><span class="lang-ar">الأسئلة الشائعة</span><span class="lang-en">FAQ</span></a>
       </div>
-
       <div class="footer-col" data-reveal style="--d:.3s">
         <h3><span class="lang-ar">تواصل معنا</span><span class="lang-en">Contact Us</span></h3>
         <p><i class="fas fa-map-marker-alt"></i><span class="lang-ar">عمّان، الأردن</span><span class="lang-en">Amman, Jordan</span></p>
@@ -1589,9 +668,7 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
         <p><i class="fas fa-envelope"></i><span dir="ltr">info@percent-perfume.com</span></p>
         <p><i class="fas fa-clock"></i><span class="lang-ar">يومياً 10ص - 10م</span><span class="lang-en">Daily 10AM - 10PM</span></p>
       </div>
-
     </div>
-
     <div class="footer-bottom">
       <p>&copy; <span id="year"></span> PERCENT PERFUME.
         <span class="lang-ar">جميع الحقوق محفوظة.</span>
@@ -1601,13 +678,9 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
   </div>
 </footer>
 
-<!-- Cart drawer -->
 <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
   <div class="cart-head">
-    <h3><i class="fas fa-shopping-bag"></i>
-      <span class="lang-ar">سلة التسوق</span>
-      <span class="lang-en">Shopping Bag</span>
-    </h3>
+    <h3><i class="fas fa-shopping-bag"></i> <span class="lang-ar">سلة التسوق</span><span class="lang-en">Shopping Bag</span></h3>
     <button id="cartClose" aria-label="Close"><i class="fas fa-times"></i></button>
   </div>
   <div class="cart-body" id="cartBody"></div>
@@ -1616,60 +689,40 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
       <span><span class="lang-ar">الإجمالي</span><span class="lang-en">Total</span></span>
       <strong id="cartTotal">0.00 JOD</strong>
     </div>
-    <button class="btn btn-gold" id="checkoutBtn">
-      <i class="fas fa-lock"></i>
-      <span class="lang-ar">إتمام الطلب</span>
-      <span class="lang-en">Checkout</span>
-    </button>
+    <button class="btn btn-gold" id="checkoutBtn"><i class="fas fa-lock"></i><span class="lang-ar">إتمام الطلب</span><span class="lang-en">Checkout</span></button>
   </div>
 </aside>
 
 <div class="overlay" id="overlay"></div>
 <button class="to-top" id="toTop" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
 
-<!-- Secret admin button (invisible until hover) -->
 <button class="secret-admin-btn" id="secretAdminBtn" aria-label="Admin Access" title="Admin">
   <i class="fas fa-key"></i>
 </button>
 
-<!-- Admin Access Modal -->
 <div class="admin-access-modal" id="adminAccessModal">
   <div class="admin-access-card">
     <div class="admin-access-icon"><i class="fas fa-shield-halved"></i></div>
     <h3>ADMIN ACCESS</h3>
     <p>أدخل كلمة المرور للوصول إلى لوحة التحكم</p>
-
     <form id="adminAccessForm">
       <div class="admin-access-error" id="adminAccessError"></div>
-      <input
-        type="password"
-        class="admin-access-input"
-        id="adminAccessPassword"
-        placeholder="••••••••"
-        autocomplete="current-password"
-      >
+      <input type="password" class="admin-access-input" id="adminAccessPassword" placeholder="••••••••" autocomplete="current-password">
       <div class="admin-access-actions">
-        <button type="button" class="admin-access-btn ghost" id="adminAccessCancel">
-          إلغاء
-        </button>
-        <button type="submit" class="admin-access-btn primary" id="adminAccessSubmit">
-          <i class="fas fa-unlock" style="margin-inline-end:6px"></i> دخول
-        </button>
+        <button type="button" class="admin-access-btn ghost" id="adminAccessCancel">إلغاء</button>
+        <button type="submit" class="admin-access-btn primary" id="adminAccessSubmit"><i class="fas fa-unlock" style="margin-inline-end:6px"></i> دخول</button>
       </div>
     </form>
-
-    <p class="admin-access-hint">
-      <i class="fas fa-lock"></i>
-      محمي بكلمة مرور
-    </p>
+    <p class="admin-access-hint"><i class="fas fa-lock"></i> محمي بكلمة مرور</p>
   </div>
 </div>
 
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastText"></span></div>
 
-<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="cart.js"></script>
 <script src="cart-ui.js"></script>
+<script src="products.js"></script>
 <script src="store.js"></script>
 <script>
 (function(){
@@ -1818,6 +871,7 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
     });
   }
   initTilt();
+  window.__reinitTilt = initTilt;
 
   /* 8. Hero parallax */
   (function heroParallax(){
@@ -1922,13 +976,17 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
       subscribed:'تم الاشتراك في النشرة البريدية بنجاح!',
       alreadySubscribed:'أنت مشترك بالفعل!',
       invalidEmail:'يرجى إدخال بريد إلكتروني صحيح',
-      searching:'البحث قيد التطوير قريباً'
+      searching:'البحث قيد التطوير قريباً',
+      noBestSellers:'لا توجد منتجات في الأكثر مبيعاً بعد',
+      noBestSellersHint:'سيتم إضافة المنتجات من لوحة التحكم'
     },
     en: {
       subscribed:'Successfully subscribed to the newsletter!',
       alreadySubscribed:'You are already subscribed!',
       invalidEmail:'Please enter a valid email address',
-      searching:'Search is coming soon'
+      searching:'Search is coming soon',
+      noBestSellers:'No best sellers yet',
+      noBestSellersHint:'Products will be added from the admin panel'
     }
   };
   const t = k => T[lang][k];
@@ -1950,7 +1008,7 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
   /* 15. Search */
   $('#searchBtn').addEventListener('click', () => showToast(t('searching'), 'fa-magnifying-glass'));
 
-  /* 16. Newsletter — saves to Store */
+  /* 16. Newsletter */
   $('#newsForm').addEventListener('submit', e => {
     e.preventDefault();
     const input = e.target.querySelector('input');
@@ -1990,7 +1048,6 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
      19. HIDDEN ADMIN ACCESS
   ============================================================ */
   (function hiddenAdminAccess(){
-
     const modal      = $('#adminAccessModal');
     const form       = $('#adminAccessForm');
     const passwordIn = $('#adminAccessPassword');
@@ -2062,7 +1119,6 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
       });
     }
 
-    /* Method 1: 5 clicks on brand */
     let tapCount = 0;
     let tapTimer = null;
 
@@ -2086,7 +1142,6 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
       });
     }
 
-    /* Method 2: Ctrl + Shift + A */
     document.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')){
         e.preventDefault();
@@ -2097,17 +1152,94 @@ html[dir="ltr"] .cart-drawer.open{transform:translateX(0)}
       }
     });
 
-    /* Method 3: Secret corner button */
     if (secretBtn){
       secretBtn.addEventListener('click', openModal);
     }
+  })();
 
+  /* ============================================================
+     20. BESTSELLERS (ديناميكي من Supabase)
+  ============================================================ */
+  (function renderBestsellers(){
+    const Products = window.PercentProducts;
+    if (!Products) return;
+
+    function esc(s){
+      if (s == null) return '';
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+    }
+
+    function renderCard(p){
+      const tag = (p.tag && Products.TAG_LABELS[p.tag]) ? `
+        <span class="product-tag">
+          <span class="lang-ar">${Products.TAG_LABELS[p.tag].ar}</span>
+          <span class="lang-en">${Products.TAG_LABELS[p.tag].en}</span>
+        </span>` : '';
+      const oldPrice = p.oldPrice ? `<span class="price-old">${Number(p.oldPrice).toFixed(2)}</span>` : '';
+      const imgHTML = p.image
+        ? `<img class="media-img" src="${esc(p.image)}" alt="" loading="lazy" onerror="this.remove()">`
+        : '';
+      return `
+        <article class="product-card tilt-card"
+                 data-name="${esc(p.id)}"
+                 data-image="${esc(p.image || '')}"
+                 data-category="${esc(p.brand || '')}"
+                 data-price="${p.price}"
+                 data-name-ar="${esc(p.nameAr)}"
+                 data-name-en="${esc(p.nameEn)}">
+          <div class="product-media">
+            <svg class="media-placeholder"><use href="#logo-mark"/></svg>
+            ${imgHTML}
+            ${tag}
+          </div>
+          <h3 class="product-title">
+            <span class="lang-ar">${esc(p.nameAr)}</span>
+            <span class="lang-en">${esc(p.nameEn)}</span>
+          </h3>
+          <p class="product-sub english-text">${esc(p.subEn || p.nameEn)}</p>
+          <div class="stars">★★★★★</div>
+          <div class="product-price">
+            <span class="price-now">${Number(p.price).toFixed(2)} JOD</span>
+            ${oldPrice}
+          </div>
+          <button class="add-to-cart">
+            <i class="fas fa-bag-shopping"></i>
+            <span class="lang-ar">أضف إلى السلة</span>
+            <span class="lang-en">Add to Cart</span>
+          </button>
+        </article>`;
+    }
+
+    function render(){
+      const grid = document.getElementById('bestsellersGrid');
+      if (!grid) return;
+      const all = Products.getActive();
+      const best = all.filter(p => p.tag === 'best').slice(0, 8);
+
+      if (!best.length){
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-muted)">
+          <i class="fas fa-star" style="font-size:2.5rem;color:rgba(212,175,55,.4);display:block;margin-bottom:14px"></i>
+          <strong style="color:var(--navy);font-weight:800;display:block;margin-bottom:6px">${t('noBestSellers')}</strong>
+          <p style="font-size:.85rem">${t('noBestSellersHint')}</p>
+        </div>`;
+        return;
+      }
+      grid.innerHTML = best.map(renderCard).join('');
+      if (typeof window.__reinitTilt === 'function') window.__reinitTilt();
+    }
+
+    Products.onChange(() => render());
+    if (document.readyState === 'loading')
+      document.addEventListener('DOMContentLoaded', render);
+    else render();
+
+    document.addEventListener('click', e => {
+      if (e.target.closest('#langBtn')) setTimeout(render, 60);
+    });
   })();
 
 })();
 </script>
 </body>
 </html>
-
-
-
